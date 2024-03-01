@@ -353,8 +353,8 @@ const Homepage = () => {
           })}
         </section>
 
-        <section className="w-[30%] h-full bg-yellow-100 sticky py-5 px-2 flex justify-start">
-          <button className="w-[166px] h-11 relative bg-indigo-500 rounded-[22px] flex justify-evenly  hover:bg-indigo-600 focus:outline-none">
+        <section className="w-[30%] h-full  sticky py-5 px-5 flex justify-start flex-col">
+          <button className="w-[166px] h-11 relative bg-indigo-500 rounded-[22px] flex justify-evenly mb-10  hover:bg-indigo-600 focus:outline-none">
             <div className="left-[16px] top-[9px]  absolute text-white text-base font-normal font-['Raleway'] leading-relaxed flex flex-row items-center ">
               <p className="mr-2">Draft an article</p>
               <span>
@@ -385,6 +385,24 @@ const Homepage = () => {
               </span>
             </div>
           </button>
+          <span className="w-full text-start text-zinc-900 text-2xl font-semibold font-['Raleway'] leading-9 flex flex-row">
+            {" "}
+            <i>
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 32 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M13.3333 13.8854L18.6666 19.2187L26.276 11.6094L29.3333 14.6667L29.3333 6.66675L21.3333 6.66675L24.3906 9.72408L18.6666 15.4481L13.3333 10.1147L3.05731 20.3907L4.94265 22.2761L13.3333 13.8854Z"
+                  fill="#171A1F"
+                />
+              </svg>
+            </i>{" "}
+            Popular{" "}
+          </span>
         </section>
       </div>
     </main>

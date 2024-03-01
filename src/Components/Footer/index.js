@@ -38,7 +38,8 @@ function Footer() {
           <div name="email" className="flex flex-row">
             <div className="w-[269px] h-[35px] pl-3 pr-[130px] pt-[7px] pb-1.5 bg-zinc-700 rounded-tl-xl rounded-bl-xl justify-start items-center gap-1.5 inline-flex">
             <div className="w-4 h-4 relative flex-col justify-start items-start flex" />
-            <div className="text-neutral-300 text-sm font-normal font-['Raleway'] leading-snug">Input your email</div>
+            
+            <input type = "email" id="email" className="text-neutral-300 text-sm font-normal font-['Raleway'] leading-snug bg-zinc-700 " placeholder='Input your email'/>
             </div>
             <div className="w-[114px] h-9 px-[24.50px] py-[7px] bg-indigo-500 rounded-tr-xl rounded-br-xl justify-center items-center inline-flex">
             <div className="text-white text-sm font-normal font-['Raleway'] leading-snug">Subscribe</div>

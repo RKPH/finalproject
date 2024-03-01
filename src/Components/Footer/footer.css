@@ -1,0 +1,27 @@
+.logo{
+    color: #FFF;
+    font-family: Bitter;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 48px; /* 150% */
+}
+a{
+    color: #FFF;
+    font-family: Raleway;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px; /* 157.143% */
+}
+h3{
+    color: #FFF;
+    font-family: Raleway;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px; /* 157.143% */
+}
+.lower h3{
+    color: yellow;
+}

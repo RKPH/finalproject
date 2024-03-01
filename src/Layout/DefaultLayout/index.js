@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from '../../Components/Header'
-
+import Footer from '../../Components/Footer'
 
 const DefaultLayout = ({children}) => {
   return (
@@ -10,7 +10,7 @@ const DefaultLayout = ({children}) => {
           <div className='mt-20'>
                {children}
           </div>
-       
+          <Footer className="w-full"/>
      </div>     
   )
 }

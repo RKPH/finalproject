@@ -1,0 +1,31 @@
+[name="main_postPage"]{
+    width: 700px;
+    height: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+[name="header-popular"]{
+    text-align: center;
+    font-size: smaller;
+    transition-duration: 0.4s;
+}
+[name="header-blockchain"]{
+    text-align: center;
+    font-size: smaller;
+    transition-duration: 0.4s;
+}
+[name="header-popular"]:hover{
+    background-color: black;
+    color:white;
+}
+[name="header-blockchain"]:hover{
+    background-color: black;
+    color:white;
+}
+[name="post-information"]{
+    border-left: 0px;
+    border-right: 0px;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+}

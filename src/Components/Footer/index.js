@@ -11,7 +11,7 @@ function Footer() {
           <h3 className="text-2xl">ITEC</h3>
         </div>
         {/* Website Guides */}
-        <div name="content" className="flex gap-20 text-lg text-justify">
+        <div name="upper-content" className="flex gap-20 text-lg text-justify">
           <div className='flex flex-col'>
             <h1 className="font-bold">Product</h1>
             <a href='/features'>Feature</a>
@@ -31,19 +31,14 @@ function Footer() {
         </div>
         {/* Mail */}
         <div name="subscription" className="flex flex-col gap-2 w-2/5 ml-10 pl-5 text-justify">
-          <div className="flex flex-col justify-start">
-            <div className="text-indigo-500 text-xl font-normal font-['Bitter'] leading-[30px]">Subscribe to our newsletter</div>
-            <div className="text-white text-xs font-normal font-['Raleway'] leading-tight">For product announcements and exclusive insights</div>
+          <div name="subscription-text" className="flex flex-col justify-start">
+            <h1 className="text-indigo-500 text-xl font-normal font-['Bitter'] leading-[30px]">Subscribe to our newsletter</h1>
+            <h3 className="text-white text-xs font-normal font-['Raleway'] leading-tight">For product announcements and exclusive insights</h3>
           </div>
           <div name="email" className="flex flex-row">
-            <div className="w-[269px] h-[35px] pl-3 pr-[130px] pt-[7px] pb-1.5 bg-zinc-700 rounded-tl-xl rounded-bl-xl justify-start items-center gap-1.5 inline-flex">
-            <div className="w-4 h-4 relative flex-col justify-start items-start flex" />
+              <input type = "email" id="email" className="text-neutral-300 text-sm font-normal font-['Raleway'] leading-snug bg-zinc-700 git" placeholder='Input your email'/>                        
+              <button name="subcrible" className="w-[114px] h-9 px-[24.50px] py-[7px] bg-indigo-500 rounded-tr-xl rounded-br-xl justify-center items-center inline-flex text-white text-sm font-normal font-['Raleway'] leading-snug">Subscribe</button>
             
-            <input type = "email" id="email" className="text-neutral-300 text-sm font-normal font-['Raleway'] leading-snug bg-zinc-700 " placeholder='Input your email'/>
-            </div>
-            <div className="w-[114px] h-9 px-[24.50px] py-[7px] bg-indigo-500 rounded-tr-xl rounded-br-xl justify-center items-center inline-flex">
-            <div className="text-white text-sm font-normal font-['Raleway'] leading-snug">Subscribe</div>
-            </div>
           </div>
         </div>
       </div>
@@ -54,12 +49,12 @@ function Footer() {
             <option value="english" class="text-gray-400 text-sm font-normal font-['Raleway'] leading-snug">Spanis</option>
         </select>
         {/*  */}
-        <div name="content" className="flex gap-7">
-            <div className="text-gray-400 text-sm font-normal font-['Raleway'] leading-snug">© 2022 Brand, Inc.</div>
+        <div name="lower-content" className="flex gap-7">
+            <h3 className="text-gray-400 text-sm font-normal font-['Raleway'] leading-snug">© 2022 Brand, Inc.</h3>
             <ul className="flex gap-6 list-disc text-gray-400 text-sm font-normal font-['Raleway'] leading-snug">
-                <li>Privacy</li>
-                <li>Term</li>
-                <li>Site map</li>
+                <li><a href=''>Privacy</a></li>
+                <li><a href=''>Term</a></li>
+                <li><a href=''>Site map</a></li>
             </ul>
         </div>
         {/* Social Media Icons */}

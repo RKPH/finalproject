@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import TuneRoundedIcon from "@mui/icons-material/TuneRounded";
 import BookmarkBorderRoundedIcon from "@mui/icons-material/BookmarkBorderRounded";
+import { Link } from "react-router-dom";
 const Homepage = () => {
   const [selectedItem, setSelectedItem] = useState("For You");
 
@@ -128,10 +129,13 @@ const Homepage = () => {
                 className="rounded-tl-[18px] rounded-tr-[18px]"
               />
               <div>
-                <h1 className="font-extrabold text-[32px]  font-['Bitter'] leading-[48px] text-black text-left hover:underline">
+                <Link
+                  to="posts?id=1"
+                  className="font-extrabold text-[32px]  font-['Bitter'] leading-[48px] text-black cur text-left hover:underline"
+                >
                   {" "}
                   NARUTO, A HERO OR A MONSTER ??
-                </h1>
+                </Link>
               </div>
               <div>
                 <p className="text-zinc-900 w-[700px] text-sm font-normal font-['Raleway'] leading-snug text-justify h-[66px] text-wrap">
@@ -386,7 +390,7 @@ const Homepage = () => {
             </div>
           </button>
 
-          <div className="w-full flex justify-between flex-col">
+          <div className="w-full flex justify-between flex-col bg-red-200 py-5 px-2 mb-4">
             <span className="w-full text-start text-zinc-900 text-2xl font-semibold font-['Raleway'] leading-9 flex flex-row items-center mb-5">
               {" "}
               <i>
@@ -750,6 +754,80 @@ const Homepage = () => {
                 </div>
               </div>
             </div>
+            <div className="text-indigo-500 text-sm font-normal font-['Raleway'] leading-snug text-start mb-5">
+              See all
+            </div>
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                border: "1px #DEE1E6 solid",
+              }}
+            ></div>
+          </div>
+
+          <div className="w-full flex justify-between flex-col py-5 px-2 bg-red-50 mb-4">
+            <span className="w-full text-start text-zinc-900 text-2xl font-semibold font-['Raleway'] leading-9 flex flex-row items-center mb-5">
+              {" "}
+              <i>
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 32 32"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M20 26.4L5.59998 12"
+                    stroke="#171A1F"
+                    stroke-width="1.92"
+                    stroke-miterlimit="10"
+                    stroke-linecap="square"
+                  />
+                  <path
+                    d="M19.2 4.80005L27.2 12.8"
+                    stroke="#171A1F"
+                    stroke-width="1.92"
+                    stroke-miterlimit="10"
+                    stroke-linecap="square"
+                  />
+                  <path
+                    d="M10.8 21.2L4.79999 27.2"
+                    stroke="#171A1F"
+                    stroke-width="1.92"
+                    stroke-miterlimit="10"
+                    stroke-linecap="square"
+                  />
+                  <path
+                    d="M25.6 11.2L17.6 24"
+                    stroke="#171A1F"
+                    stroke-width="1.92"
+                    stroke-miterlimit="10"
+                  />
+                  <path
+                    d="M8 14.4L20.8 6.40002"
+                    stroke="#171A1F"
+                    stroke-width="1.92"
+                    stroke-miterlimit="10"
+                  />
+                </svg>
+              </i>{" "}
+              People to follow
+            </span>
+
+            {/* baif viet top 1 */}
+          
+            {/* baif viet top 1 */}
+
+            {/* baif viet top 2 */}
+          
+
+            {/* baif viet top 3*/}
+            
+
+            {/* Bài viet top 4 */}
+           
+
             <div className="text-indigo-500 text-sm font-normal font-['Raleway'] leading-snug text-start mb-5">
               See all
             </div>

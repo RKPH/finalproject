@@ -1,6 +1,9 @@
-
-import Home from '../Pages/Postpage';
+import Home from "../Pages/Homepage";
+import PostPage from "../Pages/Postpage";
+import UploadPost from "../Pages/UploadPost";
 
 export const publicRoutes = [
-    { path: '/', component: Home },
-]
+  { path: "/", component: Home },
+  { path: "/posts", component: PostPage },
+  {path:'/upload', component: UploadPost}
+];

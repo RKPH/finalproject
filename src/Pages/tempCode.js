@@ -1,6 +1,8 @@
+
+
 import { generateSlug } from "../Layout/libs/generateSlug";
 import { Plus } from "lucide-react";
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import parse from "html-react-parser";
 import CustomQuillEditor from "../Components/TextEditor";
 
@@ -10,76 +12,91 @@ export default function Home() {
   const [slug, setSlug] = useState("");
   const [description, setDescription] = useState("");
   const [content, setContent] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
   useEffect(() => {
-    console.log("LINK:",backGroundimg);
+    console.log("LINK:", backGroundimg);
   }, [backGroundimg]);
-  function handleTitle(e) {
-    const newTitle = e.target.value;
-    setTitle(newTitle);
-    const autoSlug = generateSlug(newTitle);
-    setSlug(autoSlug);
-  }
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setLoading(true);
+    setError("");
   
-    // Concatenate the content with the existing text field
-    
     const newBlog = {
-      title,
-      post_background_img:backGroundimg,
+      title: title,
+      post_background_img: backGroundimg,
       text: content,
+      category: { id: 1 } // Assuming category id is 1
     };
   
     try {
-      const response = await fetch('https://englishforum.zeabur.app/api/v1/posts/user/1', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          // Add any additional headers if required
-        },
-        body: JSON.stringify(newBlog),
-      });
+      const response = await fetch(
+        "https://englishforum.zeabur.app/api/v1/posts/user/1",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newBlog),
+        }
+      );
   
       if (response.ok) {
-        console.log('Blog post submitted successfully!');
-        // Clear form fields or perform any other necessary actions
+        console.log("Blog post submitted successfully!");
+        setTitle("");
+        setBackGroundimg("");
+        setSlug("");
+        setDescription("");
+        setContent("");
       } else {
-        console.error('Failed to submit blog post:', response.status);
+        setError("Failed to submit blog post. Please try again later.");
       }
     } catch (error) {
-      console.error('Error submitting blog post:', error);
+      setError("Error submitting blog post: " + error.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+  
+
+  async function handleImageUpload(e) {
+    const file = e.target.files[0];
+    let formData = new FormData();
+    formData.append("image", file);
+
+    try {
+      const response = await fetch(
+        "https://englishforum.zeabur.app/api/v1/file/upload",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      if (response.ok) {
+        const link = await response.text();
+        setBackGroundimg(link);
+        e.target.value = "";
+      } else {
+        setError("Failed to upload image. Please try again later.");
+      }
+    } catch (error) {
+      setError("Error uploading image: " + error.message);
     }
   }
 
   function handleContentChange(html) {
     setContent(html);
   }
- 
-  async function handleImageUpload(e) {
-    const file = e.target.files[0];
-    let formData = new FormData();
-    formData.append("image", file);
-  
-    try {
-      const response = await fetch("https://englishforum.zeabur.app/api/v1/file/upload", {
-        method: "POST",
-        body: formData,
-      });
-  
-      if (response.ok) {
-        const link = await response.text();
-        setBackGroundimg(link);
-        // Clear file input
-        e.target.value = null;
-      } else {
-        console.error('Failed to upload image:', response.status);
-      }
-    } catch (error) {
-      console.error('Error uploading image:', error);
-    }
+
+  function handleTitle(e) {
+    const newTitle = e.target.value;
+    setTitle(newTitle);
+    const autoSlug = generateSlug(newTitle);
+    setSlug(autoSlug);
   }
-  
 
   return (
     <div>
@@ -93,6 +110,7 @@ export default function Home() {
             Blog Editor
           </h2>
           <form onSubmit={handleSubmit}>
+            {error && <div className="text-red-500">{error}</div>}
             <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
               {/* Title */}
               <div className="sm:col-span-2">
@@ -165,52 +183,17 @@ export default function Home() {
             </div>
             <button
               type="submit"
-              className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-purple-700 rounded-lg focus:ring-4 focus:ring-purple-200 dark:focus:ring-purple-900 hover:bg-purple-800"
+              disabled={loading}
+              className={`inline-flex items-center px-5 py-2.5 mt-10 sm:mt-6 text-sm font-medium text-center text-white bg-purple-700 rounded-lg focus:ring-4 focus:ring-purple-200 dark:focus:ring-purple-900 hover:bg-purple-800 ${loading && 'opacity-50 cursor-not-allowed'}`}
             >
-              <Plus className="w-5 h-5 mr-2" />
+              {loading ? (
+                <span className="mr-2">Submitting...</span>
+              ) : (
+                <Plus className="w-5 h-5 mr-2" />
+              )}
               <span>Create Blog Post</span>
             </button>
           </form>
-        </div>
-
-        {/* Blog View */}
-        <div className=" blog-view w-full max-w-3xl p-8 my-6 bg-white border border-gray-200 rounded-lg shadow mx-auto">
-          <h2 className="text-3xl font-bold border-b border-gray-400 pb-2 mb-5 ">
-            Blog View
-          </h2>
-          <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
-            {/* Title */}
-            <div className="sm:col-span-2">
-              <h2 className="block text-sm font-medium leading-6 text-gray-900 mb-2 ">
-                Blog Title
-              </h2>
-              <div className="mt-2">
-                <p className="text-2xl font-bold">{title}</p>
-              </div>
-            </div>
-            {/* Slug */}
-            <div className="sm:col-span-2">
-              <h2 className="block text-sm font-medium leading-6 text-gray-900 mb-2 ">
-                Blog Slug
-              </h2>
-              <div className="mt-2">
-                <p>{slug}</p>
-              </div>
-            </div>
-            {/* Description */}
-            <div className="sm:col-span-2">
-              <h2 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                Blog Description
-              </h2>
-              <p>{description}</p>
-            </div>
-            <div className="sm:col-span-full">
-              <h2 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                Blog Content
-              </h2>
-              {parse(content)}
-            </div>
-          </div>
         </div>
       </div>
     </div>

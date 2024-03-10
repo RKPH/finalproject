@@ -1,18 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Drawer, Button } from '@mui/material';
 import './Postpage.css';
 
-const Postpage = () =>{
-    return(
-        <main name="main_postPage" className=' pt-[32px] pl-[32px]'>
+const Postpage = () => {
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+    const toggleDrawer = () => {
+        setIsDrawerOpen(!isDrawerOpen);
+    };
+
+    return (
+        <main name="main_postPage" className='pt-[32px] pl-[32px]'>
             <div name="main-header" className='flex flex-row items-center w-[85%] gap-[12px]'>
                 <button name="header-popular" className='w-[60px] h-7 px-2 py-1 bg-white rounded-[14px] border border-zinc-900 justify-center items-center inline-flex'>
                     Popular
                 </button>
-                <button name='header-blockchain' className=' w-[auto] h-7 px-2 py-1 bg-white rounded-[14px] border border-zinc-900 justify-center items-center inline-flex'>
+                <button name='header-blockchain' className='w-[auto] h-7 px-2 py-1 bg-white rounded-[14px] border border-zinc-900 justify-center items-center inline-flex'>
                     Blockchain
                 </button>
                 <div name="header-date" className="text-zinc-700 text-[11px] font-medium font-['Raleway'] leading-[18px]">Jun 27, 2023</div>
             </div>
+
             <div name="main-post" className='mt-[28px] w-[95%]'>
                 <div name="post-title">
                     <h1 className="w-[636px] text-zinc-900 text-[32px] font-normal font-['Bitter'] leading-[48px]">Demystifying Blockchain: Was it intentionally made confusing?</h1>
@@ -37,12 +45,12 @@ const Postpage = () =>{
                             </svg>
                             <p className="text-zinc-700 text-base font-light font-['Raleway'] leading-relaxed">1.8M</p>
                         </div>
-                        
+
                         <div className='gap-[4px] flex flex-row'>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-[24px] h-[24px]">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
                             </svg>
-                            <p className="text-zinc-700 text-base font-light font-['Raleway'] leading-relaxed">4K</p>
+                            <p onClick={toggleDrawer}  className="text-zinc-700 text-base font-light font-['Raleway'] leading-relaxed cursor-pointer hover:scale-110">4K</p>
                         </div>
                     </div>
                     <div className='flex flex-row gap-[12px]'>
@@ -57,7 +65,7 @@ const Postpage = () =>{
                         </svg>
                     </div>
                 </div>
-                <img src="https://images.igdb.com/igdb/image/upload/t_1080p/sclni3.png" className='mt-[85px]'/>
+                <img src="https://images.igdb.com/igdb/image/upload/t_1080p/sclni3.png" className='mt-[85px]' />
                 <div name="content" className='mt-[55px] text-left flex flex-col'>
                     <div name="content-img" className='gap-[64px] flex flex-col'>
                         <div name="img-text" className="w-[636px] text-zinc-900 text-base font-normal font-['Raleway'] leading-relaxed">Blockchain technology has emerged as a groundbreaking innovation with the potential to revolutionize industries and transform our digital landscape. However, as we delve into the intricacies of blockchain, we often encounter a daunting array of technical terms, complex concepts, and seemingly impenetrable jargon.</div>
@@ -70,17 +78,17 @@ const Postpage = () =>{
                         </div>
                         <div name='list-1' className='flex flex-col gap-[5px]'>
                             <h1 className="text-zinc-900 text-base font-medium font-['Raleway'] leading-relaxed">1. Security and Trust:</h1>
-                            <img/>
+                            <img />
                             <p className="w-[636px] text-zinc-900 text-sm font-normal font-['Raleway'] leading-snug">Blockchain aims to create a secure and trustworthy system for conducting transactions and storing information. Its complexity is a direct result of the robust security measures and cryptographic protocols it employs. By using advanced encryption techniques and decentralized consensus mechanisms, blockchain ensures the integrity of data and prevents tampering or fraud.</p>
                         </div>
                         <div name='list-2' className='flex flex-col gap-[5px]'>
                             <h1 className="text-zinc-900 text-base font-medium font-['Raleway'] leading-relaxed">1. Security and Trust:</h1>
-                            <img/>
+                            <img />
                             <p className="w-[636px] text-zinc-900 text-sm font-normal font-['Raleway'] leading-snug">Blockchain aims to create a secure and trustworthy system for conducting transactions and storing information. Its complexity is a direct result of the robust security measures and cryptographic protocols it employs. By using advanced encryption techniques and decentralized consensus mechanisms, blockchain ensures the integrity of data and prevents tampering or fraud.</p>
                         </div>
                         <div name='list-3' className='flex flex-col gap-[5px]'>
                             <h1 className="text-zinc-900 text-base font-medium font-['Raleway'] leading-relaxed">1. Security and Trust:</h1>
-                            <img/>
+                            <img />
                             <p className="w-[636px] text-zinc-900 text-sm font-normal font-['Raleway'] leading-snug">Blockchain aims to create a secure and trustworthy system for conducting transactions and storing information. Its complexity is a direct result of the robust security measures and cryptographic protocols it employs. By using advanced encryption techniques and decentralized consensus mechanisms, blockchain ensures the integrity of data and prevents tampering or fraud.</p>
                         </div>
                         <div name='list-4' className='flex flex-col gap-[5px]'>
@@ -90,9 +98,18 @@ const Postpage = () =>{
                         </div>
                     </div>
                 </div>
-
-                
             </div>
+
+            {/* Drawer Component */}
+            <Drawer anchor="right" className='h-full mt-20' open={isDrawerOpen} onClose={toggleDrawer}  style={{ height: '100%' }}>
+                <div style={{ width: '450px' }}>
+                    <h2>Drawer Content</h2>
+                    <Button onClick={toggleDrawer}>Close Drawer</Button>
+                </div>
+            </Drawer>
+            
+            {/* Button to Toggle Drawer */}
+           
         </main>
     )
 }

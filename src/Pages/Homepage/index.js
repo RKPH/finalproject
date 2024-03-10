@@ -360,7 +360,7 @@ const Homepage = () => {
         <section className="w-[30%] h-full  sticky py-5 px-5 flex justify-start flex-col">
           <button className="w-[166px] h-11 relative bg-indigo-500 rounded-[22px] flex justify-evenly mb-4 hover:bg-indigo-600 focus:outline-none">
             <div className="left-[16px] top-[9px]  absolute text-white text-base font-normal font-['Raleway'] leading-relaxed flex flex-row items-center ">
-              <p className="mr-2">Draft an article</p>
+             <Link  to="/upload"> <p  className="mr-2 flex items-center">Draft an article</p></Link>
               <span>
                 <i>
                   <svg

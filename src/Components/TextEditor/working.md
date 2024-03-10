@@ -2,14 +2,6 @@ import React, { Component } from "react";
 import ReactQuill from "react-quill";
 import Quill from "quill";
 import "react-quill/dist/quill.snow.css";
-import ImageResize from 'quill-image-resize-module-react'; // Add this line
-import './index.css'
-// Get the alignment attribute
-let AlignStyle = Quill.import('attributors/style/align');
-
-// Register the alignment style
-Quill.register(AlignStyle, true);
-Quill.register('modules/imageResize', ImageResize); // Add this line
 
 class ImageUploader {
   constructor(quill, options) {
@@ -48,7 +40,7 @@ export default class CustomQuillEditor extends Component {
         [{ header: [1, 2, 3, 4, 5, 6, false] }],
         ["bold", "italic", "underline"],
         [{ list: "ordered" }, { list: "bullet" }],
-        [{ align: ['', 'center', 'right', 'justify'] }], // updated
+        [{ align: [] }],
         ["link", "image"],
         ["clean"],
         [{ color: [] }],
@@ -59,10 +51,6 @@ export default class CustomQuillEditor extends Component {
       imageUploader: {
         upload: this.uploadImageCallBack,
       },
-      imageResize: {
-        parchment: Quill.import('parchment'),
-        modules: ['Resize', 'DisplaySize']
-      }   
     };
     this.formats = [
       "header",
@@ -78,7 +66,6 @@ export default class CustomQuillEditor extends Component {
       "image",
       "code-block",
       "color",
-      "align"
     ];
   }
 
@@ -111,13 +98,11 @@ export default class CustomQuillEditor extends Component {
     const { editorState } = this.state;
     return (
       <ReactQuill
-        className="border border-black  "
         theme="snow"
         value={editorState}
         onChange={this.onContentChange}
         modules={this.modules}
         formats={this.formats}
-       
       />
     );
   }

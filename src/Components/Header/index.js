@@ -21,7 +21,7 @@ const Header = () => {
         <form className="relative">
           <input
             type="text"
-            className="w-[599px] h-[50px] pl-12 pr-14 py-3 ml-[2%] rounded-3xl bg-gray-100 border border-transparent focus:outline-none focus:border-black"
+            className="w-[399px] h-[50px] pl-12 pr-14 py-3 ml-[2%] rounded-3xl bg-gray-100 border border-transparent focus:outline-none focus:border-black"
             placeholder="Search..."
           />
           <button

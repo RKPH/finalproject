@@ -1,40 +1,49 @@
+import { generateSlug } from "../../Layout/libs/generateSlug";
 import { Plus } from "lucide-react";
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import parse from "html-react-parser";
 import CustomQuillEditor from "../../Components/TextEditor";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { setTitle, setBackGroundimg, setContent, setLoading, setError, setSuccess } from "../../Hooks/postslice";
 import "./uploadPost.css";
+
+
 
 export default function Home() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
-  const { title, backGroundimg, content, loading, error, success } = useSelector((state) => state.post);
-
+  const [title, setTitle] = useState("");
+  const [backGroundimg, setBackGroundimg] = useState("");
+  const [slug, setSlug] = useState("");
+  const [description, setDescription] = useState("");
+  const [content, setContent] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   useEffect(() => {
     console.log("LINK:", backGroundimg);
   }, [backGroundimg]);
-
   function handleTitle(e) {
     const newTitle = e.target.value;
-    dispatch(setTitle(newTitle));
-    
+    setTitle(newTitle);
+    const autoSlug = generateSlug(newTitle);
+    setSlug(autoSlug);
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
     if (!title || !backGroundimg || !content) {
-      dispatch(setError("Please complete all necessary fields."));
+      setError("Please complete all necessary fields.");
       setTimeout(() => {
-        dispatch(setError(""));
+        setError("");
       }, 3000); // 3 seconds
       return;
     }
-    dispatch(setLoading(true));
-    dispatch(setError(""));
+    setLoading(true);
+    setError("");
+    setLoading(true);
+    setError("");
     // Concatenate the content with the existing text field
+
     const newBlog = {
       title,
       post_background_img: backGroundimg,
@@ -56,17 +65,18 @@ export default function Home() {
 
       if (response.ok) {
         console.log("Blog post submitted successfully!");
-        dispatch(setSuccess("submit successfully"));
+        setSuccess("submit successfully");
         setTimeout(() => {
-          dispatch(setSuccess(""));
+          setSuccess("");
+          navigate("/"); // Redirect to homepage
         }, 3000); // 3 seconds
         // Clear form fields or perform any other necessary actions
       } else {
         console.error("Failed to submit blog post:", response.status);
-        dispatch(setError("Failed to submit blog post. Please try again later."));
+        setError("Failed to submit blog post. Please try again later.");
         setTimeout(() => {
-          dispatch(setError(""));
-          navigate("/"); // Redirect to homepage
+          setError("");
+        
         }, 3000); // 3 seconds
       }
     } catch (error) {
@@ -75,7 +85,7 @@ export default function Home() {
   }
 
   function handleContentChange(html) {
-    dispatch(setContent(html));
+    setContent(html);
   }
 
   async function handleImageUpload(e) {
@@ -94,7 +104,7 @@ export default function Home() {
 
       if (response.ok) {
         const link = await response.text();
-        dispatch(setBackGroundimg(link));
+        setBackGroundimg(link);
         // Clear file input
         e.target.value = null;
       } else {

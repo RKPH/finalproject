@@ -1,15 +1,25 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Loginpage from "../Login/Loginpage";
 import Registerpage from "../Login/Registerpage";
 import SearchIcon from "@mui/icons-material/Search";
 import LogoIcon from "../../assests/Image 109.png";
 
-
 const Header = () => {
   const [loginPopup, setLoginPopup] = useState(false);
   const [registerPopup, setRegisterPopup] = useState(false);
+
+  const openLoginPopup = () => {
+    setLoginPopup(true);
+    setRegisterPopup(false); // Close register popup if open
+  };
+
+  const openRegisterPopup = () => {
+    setRegisterPopup(true);
+    setLoginPopup(false); // Close login popup if open
+  };
+
   return (
-    <header className="fixed top-0 left-0 right-0 h-20 w-full bg-white border-b flex items-center justify-between" style={{zIndex:'99999'}}>
+    <header className="fixed top-0 left-0 right-0 h-20 w-full bg-white border-b flex items-center justify-between" style={{ zIndex: '99999' }}>
       {/* Logo */}
       <div className="flex flex-row justify-center items-center w-[15%] h-full">
         <img src={LogoIcon} alt="Logo" className="h-12 w-22 mr-2" />
@@ -37,7 +47,7 @@ const Header = () => {
         <button
           className="flex-grow-0 flex-shrink-0 bg-black text-white w-32 h-[42px] border border-zinc-900 px-4 py-2 rounded-[18px] mr-4 transition duration-300 ease-in-out hover:bg-gray-800 hover:border-gray-800"
           style={{ lineHeight: "1" }}
-          onClick={()=> setLoginPopup(true)}
+          onClick={openLoginPopup}
         >
           Login
         </button>
@@ -45,7 +55,7 @@ const Header = () => {
         <button
           className="flex-grow-0 flex-shrink-0 bg-white w-32 h-[42px] border border-black px-4 py-2 rounded-[18px] text-zinc-900 transition duration-300 ease-in-out hover:bg-gray-200 hover:border-gray-800"
           style={{ lineHeight: "1" }}
-          onClick={()=> setRegisterPopup(true)}
+          onClick={openRegisterPopup}
         >
           Sign Up
         </button>

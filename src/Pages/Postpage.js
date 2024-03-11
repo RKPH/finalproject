@@ -327,7 +327,8 @@ const Postpage = () => {
             <div className="text-zinc-900 text-[32px] font-normal font-['Bitter'] leading-[48px]">
               Comment (4,532)
             </div>
-            <Button onClick={toggleDrawer}>Close Drawer</Button>
+            <CloseIcon onClick={toggleDrawer}/>
+           
           </div>
           <div className="flex flex-col justify-between w-[700px] h-[130px]  mb-5 ">
             <div className="flex items-center  w-full h-full px-4">

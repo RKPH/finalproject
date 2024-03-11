@@ -64,19 +64,22 @@ export default function Home() {
       );
 
       if (response.ok) {
+        const data = await response.json();
+        console.log("response: ", response)
         console.log("Blog post submitted successfully!");
         setSuccess("submit successfully");
         setTimeout(() => {
           setSuccess("");
-          navigate("/"); // Redirect to homepage
+          navigate(`/posts/${data.id}`); // Redirect to the current post id
+          setTimeout(() => {
+            // Clear form fields or perform any other necessary actions
+          }, 3000); // 3 seconds
         }, 3000); // 3 seconds
-        // Clear form fields or perform any other necessary actions
       } else {
         console.error("Failed to submit blog post:", response.status);
         setError("Failed to submit blog post. Please try again later.");
         setTimeout(() => {
           setError("");
-        
         }, 3000); // 3 seconds
       }
     } catch (error) {

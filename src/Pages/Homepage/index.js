@@ -1,12 +1,48 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TuneRoundedIcon from "@mui/icons-material/TuneRounded";
 import BookmarkBorderRoundedIcon from "@mui/icons-material/BookmarkBorderRounded";
 import { Link } from "react-router-dom";
+import { fetchAPI } from "../../Components/API/fetchAPI";
 const Homepage = () => {
   const [selectedItem, setSelectedItem] = useState("For You");
 
   const handleItemClick = (item) => {
     setSelectedItem(item);
+  };
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await fetchAPI();
+        setData(result);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+  const extractParagraphs = (htmlString) => {
+    const doc = new DOMParser().parseFromString(htmlString, 'text/html');
+        const paragraphs = doc.querySelectorAll('p');
+        return Array.from(paragraphs).map(paragraph => {
+            // Remove img tags from the paragraph content
+            Array.from(paragraph.querySelectorAll('img')).forEach(img => img.remove());
+            return paragraph.innerHTML;
+        }).join('');
   };
 
   return (
@@ -234,19 +270,15 @@ const Homepage = () => {
             </div>
           </div>
           {/* MAIN POSTS      */}
-          {[1, 1, 1, 1, 1].map(() => {
+          {data.content.map((item) => {
             return (
               <div className="w-full h-[212px]  flex justify-center mb-8">
                 <div className="w-[800px] h-full  flex flex-row px-[12px] py-[12px]  border border-[lightGray]">
                   <section className="w-[65%] h-full  flex  flex-col justify-between">
-                    <div className="w-[324px]  text-zinc-900 text-2xl font-normal font-['Bitter'] leading-9 text-wrap text-start hover:underline">
-                      The economics behind unpaid internship
-                    </div>
-                    <div className="w-[396px] text-zinc-900 text-base font-normal font-['Raleway'] leading-tight text-justify">
-                      Corporates contend that unpaid internships serve as a
-                      stepping stone towards future employment, offering
-                      invaluable industry exposure...
-                    </div>
+                  <Link to={`/posts/${item.id}`} className="w-[324px] text-zinc-900 text-2xl font-normal font-['Bitter'] leading-9 text-wrap text-start hover:underline">
+                    {item.title}
+                  </Link>
+                    <div dangerouslySetInnerHTML={{ __html: extractParagraphs(item.text) }} className="post-text w-[396px] text-zinc-900 text-base font-normal font-['Raleway'] leading-tight text-justify"/>
                     <div className="w-full h-7 flex flex-row items-center">
                       <button className="text-gray-600 w-[44px] h-full text-xs font-normal font-['Raleway'] leading-tight rounded-xl  border border-black mr-[12px]">
                         popular

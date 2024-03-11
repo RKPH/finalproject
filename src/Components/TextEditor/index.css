@@ -1,0 +1,25 @@
+.rdw-dropdownoption-default{
+    color: black;
+}
+
+.rdw-dropdown-selectedtext {
+    color: black;
+}
+
+.ql-container {
+    min-height: 30rem;
+    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .ql-editor {
+    min-height: 100%;
+    height: 100%;
+    flex: 1;
+    overflow-y: auto; /* Add this line */
+    width: 100%;
+    max-height: 30rem; /* Set a max-height value */
+  }
+  

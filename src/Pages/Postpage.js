@@ -17,7 +17,7 @@ const Postpage = () => {
     const commentData = {
       body: commentBody,
       userDto: {
-        id: userId,
+        id: 1,
         // Assuming other user data is available in your application state
       },
     };

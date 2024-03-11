@@ -1,12 +1,47 @@
-import React from 'react'
+import { createSlice } from '@reduxjs/toolkit';
 
-const LoginPage
- = () => {
-  return (
-    <div>LoginPage
-      
-    </div>
-  )
-}
+export const postSlice = createSlice({
+  name: 'post',
+  initialState: {
+    title: '',
+    backGroundimg: '',
+    content: '',
+    loading: false,
+    error: '',
+    success: '',
+  },
+  reducers: {
+    setTitle: (state, action) => {
+      state.title = action.payload;
+    },
+    setBackGroundimg: (state, action) => {
+      state.backGroundimg = action.payload;
+    },
+    setContent: (state, action) => {
+      state.content = action.payload;
+    },
+    setLoading: (state, action) => {
+      state.loading = action.payload;
+    },
+    setError: (state, action) => {
+      state.error = action.payload;
+    },
+    setSuccess: (state, action) => {
+      state.success = action.payload;
+    },
+    resetState: (state) => {
+      state.title = '';
+      state.backGroundimg = '';
+      state.content = '';
+      state.loading = false;
+      state.error = '';
+      state.success = '';
+    },
+  },
+});
 
-export default LoginPage
+export const { setTitle, setBackGroundimg, setContent, setLoading, setError, setSuccess, resetState } = postSlice.actions;
+
+export const selectPost = (state) => state.post;
+
+export default postSlice.reducer;

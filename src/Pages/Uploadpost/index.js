@@ -1,62 +1,52 @@
-import { generateSlug } from "../../Layout/libs/generateSlug";
+
 import { Plus } from "lucide-react";
-import React, { useState, useEffect } from "react";
-import parse from "html-react-parser";
-import CustomQuillEditor from "../../Components/TextEditor";
-import { useNavigate } from "react-router-dom";
-import "./uploadPost.css";
+import { useDispatch, useSelector } from 'react-redux';
 
-
+import { setTitle, setBackGroundimg, setContent, setLoading, setError, setSuccess } from '../../Hooks/postslice';
+import parse from 'html-react-parser';
+import CustomQuillEditor from '../../Components/TextEditor';
+import { useNavigate } from 'react-router-dom';
+import './uploadPost.css';
 
 export default function Home() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { title, backGroundimg, content,error, success } = useSelector((state) => state.post);
 
-  const [title, setTitle] = useState("");
-  const [backGroundimg, setBackGroundimg] = useState("");
-  const [slug, setSlug] = useState("");
-  const [description, setDescription] = useState("");
-  const [content, setContent] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-  useEffect(() => {
-    console.log("LINK:", backGroundimg);
-  }, [backGroundimg]);
+  // Handlers
+
   function handleTitle(e) {
-    const newTitle = e.target.value;
-    setTitle(newTitle);
-    const autoSlug = generateSlug(newTitle);
-    setSlug(autoSlug);
+    dispatch(setTitle(e.target.value));
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
+    // Validate form fields
     if (!title || !backGroundimg || !content) {
-      setError("Please complete all necessary fields.");
+      dispatch(setError('Please complete all necessary fields.'));
       setTimeout(() => {
-        setError("");
-      }, 3000); // 3 seconds
+        dispatch(setError(''));
+      }, 3000);
       return;
     }
-    setLoading(true);
-    setError("");
-    setLoading(true);
-    setError("");
-    // Concatenate the content with the existing text field
-
+    // Dispatch action to set loading state
+    dispatch(setLoading(true));
+    dispatch(setError(''));
+    // Create new blog object
     const newBlog = {
       title,
       post_background_img: backGroundimg,
       text: content,
     };
-
     try {
+      // Make API call to submit blog post
+      // This part remains unchanged
       const response = await fetch(
-        "https://englishforum.zeabur.app/api/v1/posts/user/1?categoryId=1",
+        'https://englishforum.zeabur.app/api/v1/posts/user/1?categoryId=1',
         {
-          method: "POST",
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
             // Add any additional headers if required
           },
           body: JSON.stringify(newBlog),
@@ -65,37 +55,39 @@ export default function Home() {
 
       if (response.ok) {
         const data = await response.json();
-        console.log("response: ", response)
-        console.log("Blog post submitted successfully!");
-        setSuccess("submit successfully");
+        console.log('response: ', response);
+        console.log('Blog post submitted successfully!');
+        dispatch(setSuccess('submit successfully'));
         setTimeout(() => {
-          setSuccess("");
+          dispatch(setSuccess(''));
           navigate(`/posts/${data.id}`); // Redirect to the current post id
           setTimeout(() => {
             // Clear form fields or perform any other necessary actions
           }, 3000); // 3 seconds
         }, 3000); // 3 seconds
       } else {
-        console.error("Failed to submit blog post:", response.status);
-        setError("Failed to submit blog post. Please try again later.");
+        console.error('Failed to submit blog post:', response.status);
+        dispatch(setError('Failed to submit blog post. Please try again later.'));
         setTimeout(() => {
-          setError("");
+          dispatch(setError(''));
         }, 3000); // 3 seconds
       }
     } catch (error) {
-      console.error("Error submitting blog post:", error);
+      console.error('Error submitting blog post:', error);
     }
   }
 
+
   function handleContentChange(html) {
-    setContent(html);
+    dispatch(setContent(html)); // Dispatch action to update content
   }
+  
 
   async function handleImageUpload(e) {
     const file = e.target.files[0];
     let formData = new FormData();
     formData.append("image", file);
-
+  
     try {
       const response = await fetch(
         "https://englishforum.zeabur.app/api/v1/file/upload",
@@ -104,10 +96,10 @@ export default function Home() {
           body: formData,
         }
       );
-
+  
       if (response.ok) {
         const link = await response.text();
-        setBackGroundimg(link);
+        dispatch(setBackGroundimg(link)); // Dispatch action to update background image link
         // Clear file input
         e.target.value = null;
       } else {
@@ -117,6 +109,7 @@ export default function Home() {
       console.error("Error uploading image:", error);
     }
   }
+  
 
   return (
     <div>

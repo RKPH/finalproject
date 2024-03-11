@@ -28,7 +28,7 @@ const Header = () => {
       <Link className="flex flex-row justify-center items-center w-[15%] h-full"  to="/">
         <div className="flex flex-row justify-center items-center w-full h-full">
           <img src={LogoIcon} alt="Logo" className="h-12 w-22 mr-2" />
-          <div className="font-bold text-3xl text-black">ITEC</div>
+          <div className="font-bold text-3xl text-blackx">ITEC</div>
         </div>
       </Link>
 

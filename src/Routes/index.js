@@ -4,6 +4,6 @@ import UploadPost from "../Pages/Uploadpost";
 
 export const publicRoutes = [
   { path: "/", component: Home },
-  { path: "/posts", component: PostPage },
+  { path: "/posts/:id", component: PostPage },
   {path:'/upload', component: UploadPost}
 ];

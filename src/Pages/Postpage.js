@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router';
 import { Drawer, Button } from '@mui/material';
 import './Postpage.css';
 
@@ -7,6 +8,55 @@ const Postpage = () => {
 
     const toggleDrawer = () => {
         setIsDrawerOpen(!isDrawerOpen);
+    };
+
+    const { id: postId } = useParams(); // Getting postId from URL
+    const [post, setPost] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        if (!postId) {
+            // Handle case where postId is undefined
+            setError('Post ID is missing');
+            setLoading(false);
+            return;
+        }
+        const fetchPost = async () => {
+            try {
+                const response = await fetch(`https://englishforum.zeabur.app/api/v1/posts/${postId}`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch post');
+                }
+                const data = await response.json();
+                setPost(data); // Set the entire post object
+            } catch (error) {
+                setError(error.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchPost();
+    }, [postId]);
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
+
+    // Render paragraphs
+    const renderParagraphs = () => {
+        const paragraphs = post.text.split('</p>').map((paragraph, index) => {
+            if (paragraph.trim() !== '') {
+                return <p key={index} dangerouslySetInnerHTML={{ __html: paragraph }} />;
+            }
+            return null;
+        });
+        return paragraphs;
     };
 
     return (
@@ -23,7 +73,7 @@ const Postpage = () => {
 
             <div name="main-post" className='mt-[28px] w-[95%]'>
                 <div name="post-title">
-                    <h1 className="w-[636px] text-zinc-900 text-[32px] font-normal font-['Bitter'] leading-[48px]">Demystifying Blockchain: Was it intentionally made confusing?</h1>
+                    <h1 className="w-[636px] text-zinc-900 text-[32px] font-normal font-['Bitter'] leading-[48px]">{post.title}</h1>
                 </div>
                 <div name="post-user" className='flex flex-row w-[636px] gap-[11px] items-center mt-[24px]'>
                     <div className="w-[42px] h-[42px] bg-zinc-300 rounded-[21px]" />
@@ -65,38 +115,9 @@ const Postpage = () => {
                         </svg>
                     </div>
                 </div>
-                <img src="https://images.igdb.com/igdb/image/upload/t_1080p/sclni3.png" className='mt-[85px]' />
+                
                 <div name="content" className='mt-[55px] text-left flex flex-col'>
-                    <div name="content-img" className='gap-[64px] flex flex-col'>
-                        <div name="img-text" className="w-[636px] text-zinc-900 text-base font-normal font-['Raleway'] leading-relaxed">Blockchain technology has emerged as a groundbreaking innovation with the potential to revolutionize industries and transform our digital landscape. However, as we delve into the intricacies of blockchain, we often encounter a daunting array of technical terms, complex concepts, and seemingly impenetrable jargon.</div>
-                        <div name="img-text" className="w-[636px] text-zinc-900 text-base font-normal font-['Raleway'] leading-relaxed">Blockchain technology has emerged as a groundbreaking innovation with the potential to revolutionize industries and transform our digital landscape. However, as we delve into the intricacies of blockchain, we often encounter a daunting array of technical terms, complex concepts, and seemingly impenetrable jargon.</div>
-                    </div>
-                    <div name="content-post" className='flex flex-col mt-[86px] mb-[52px] gap-[64px]'>
-                        <div>
-                            <h1 name='content-title' className="text-zinc-900 text-2xl font-normal font-['Bitter'] leading-9">Unraveling the Complexity</h1>
-                            <p name='content-information' className="w-[636px] text-zinc-900 text-sm font-normal font-['Raleway'] leading-snug">At first glance, blockchain can appear as a labyrinth of cryptographic algorithms, consensus mechanisms, and distributed ledgers. The technical nature of blockchain has led many to believe that it was intentionally designed to be confusing, keeping it exclusive to a select few. However, upon closer inspection, we discover that the complexity of blockchain arises from the inherent challenges it seeks to overcome.</p>
-                        </div>
-                        <div name='list-1' className='flex flex-col gap-[5px]'>
-                            <h1 className="text-zinc-900 text-base font-medium font-['Raleway'] leading-relaxed">1. Security and Trust:</h1>
-                            <img />
-                            <p className="w-[636px] text-zinc-900 text-sm font-normal font-['Raleway'] leading-snug">Blockchain aims to create a secure and trustworthy system for conducting transactions and storing information. Its complexity is a direct result of the robust security measures and cryptographic protocols it employs. By using advanced encryption techniques and decentralized consensus mechanisms, blockchain ensures the integrity of data and prevents tampering or fraud.</p>
-                        </div>
-                        <div name='list-2' className='flex flex-col gap-[5px]'>
-                            <h1 className="text-zinc-900 text-base font-medium font-['Raleway'] leading-relaxed">1. Security and Trust:</h1>
-                            <img />
-                            <p className="w-[636px] text-zinc-900 text-sm font-normal font-['Raleway'] leading-snug">Blockchain aims to create a secure and trustworthy system for conducting transactions and storing information. Its complexity is a direct result of the robust security measures and cryptographic protocols it employs. By using advanced encryption techniques and decentralized consensus mechanisms, blockchain ensures the integrity of data and prevents tampering or fraud.</p>
-                        </div>
-                        <div name='list-3' className='flex flex-col gap-[5px]'>
-                            <h1 className="text-zinc-900 text-base font-medium font-['Raleway'] leading-relaxed">1. Security and Trust:</h1>
-                            <img />
-                            <p className="w-[636px] text-zinc-900 text-sm font-normal font-['Raleway'] leading-snug">Blockchain aims to create a secure and trustworthy system for conducting transactions and storing information. Its complexity is a direct result of the robust security measures and cryptographic protocols it employs. By using advanced encryption techniques and decentralized consensus mechanisms, blockchain ensures the integrity of data and prevents tampering or fraud.</p>
-                        </div>
-                        <div name='list-4' className='flex flex-col gap-[5px]'>
-                            <h1 className="w-[306px] text-zinc-900 text-2xl font-normal font-['Bitter'] leading-9">Demystifying Blockchain:</h1>
-                            <p className="w-[636px] text-zinc-900 text-sm font-normal font-['Raleway'] leading-snug">While the complexity of blockchain may initially appear intimidating, it is essential to emphasize that understanding blockchain is within reach for anyone willing to explore it. Numerous educational resources, online courses, and communities have emerged to bridge the knowledge gap and make blockchain more accessible.</p>
-                            <p className="w-[636px] text-zinc-900 text-sm font-normal font-['Raleway'] leading-snug">To demystify blockchain, breaking down complex concepts into digestible pieces is crucial. By explaining the underlying principles of cryptography, distributed consensus, and data structures, we can empower individuals to grasp the fundamentals. Visualizations, real-world examples, and simplified explanations can also play a vital role in demystifying blockchain and making it more approachable to a wider audience.</p>
-                        </div>
-                    </div>
+                    {renderParagraphs()}
                 </div>
             </div>
 

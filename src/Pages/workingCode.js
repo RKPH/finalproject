@@ -1,8 +1,8 @@
-import { generateSlug } from "../../Layout/libs/generateSlug";
+import { generateSlug } from "../Layout/libs/generateSlug";
 import { Plus } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import parse from "html-react-parser";
-import CustomQuillEditor from "../../Components/TextEditor";
+import CustomQuillEditor from "../Components/TextEditor";
 import { useNavigate } from "react-router-dom";
 import "./uploadPost.css";
 

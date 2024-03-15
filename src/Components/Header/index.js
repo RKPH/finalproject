@@ -3,6 +3,7 @@ import Loginpage from "../Login/Loginpage";
 import Registerpage from "../Login/Registerpage";
 import SearchIcon from "@mui/icons-material/Search";
 import LogoIcon from "../../assests/Image 109.png";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [loginPopup, setLoginPopup] = useState(false);
@@ -19,12 +20,17 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 h-20 w-full bg-white border-b flex items-center justify-between" style={{ zIndex: '99999' }}>
+    <header
+      className="fixed top-0 left-0 right-0 h-20 w-full bg-white border-b flex items-center justify-between"
+      style={{ zIndex: "99999" }}
+    >
       {/* Logo */}
-      <div className="flex flex-row justify-center items-center w-[15%] h-full">
-        <img src={LogoIcon} alt="Logo" className="h-12 w-22 mr-2" />
-        <div className="font-bold text-3xl">ITEC</div>
-      </div>
+      <Link className="flex flex-row justify-center items-center w-[15%] h-full"  to="/">
+        <div className="flex flex-row justify-center items-center w-full h-full">
+          <img src={LogoIcon} alt="Logo" className="h-12 w-22 mr-2" />
+          <div className="font-bold text-3xl text-blackx">ITEC</div>
+        </div>
+      </Link>
 
       {/* Navbar */}
       <nav className="w-[40%] h-full flex bg-[F3F4F6] items-center">
@@ -59,7 +65,10 @@ const Header = () => {
         >
           Sign Up
         </button>
-        <Registerpage trigger={registerPopup} setTrigger={setRegisterPopup}></Registerpage>
+        <Registerpage
+          trigger={registerPopup}
+          setTrigger={setRegisterPopup}
+        ></Registerpage>
       </div>
     </header>
   );

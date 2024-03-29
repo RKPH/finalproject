@@ -488,11 +488,11 @@ const Postpage = () => {
       {/* Drawer Component */}
       <Drawer
         anchor="right"
-        className="mt-20  h-fit"
+        className="h-fit"
         open={isDrawerOpen}
         onClose={toggleDrawer}
       >
-        <div className="flex flex-col justify-between w-[800px] items-center px-5 py-5">
+        <div className="flex flex-col w-[800px] justify-center items-center px-5 py-5 mt-20">
           <div className="flex flex-row justify-between w-[700px] mb-5">
             <div className="text-zinc-900 text-[32px] font-normal font-['Bitter'] leading-[48px]">
               Comment (

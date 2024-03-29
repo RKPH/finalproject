@@ -145,8 +145,8 @@ const Index = () => {
       const response = await axios.put(
         `https://englishforum.zeabur.app/api/v1/users/${user.id}`,
         {
-          ...user,
-          password: "1234",
+
+          
           username: name, // Update the username here
           avatar: avatar, // Update the avatar here
         },

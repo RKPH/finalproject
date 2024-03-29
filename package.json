@@ -2,6 +2,8 @@
   "name": "finalproject",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://rkph.github.io/finalproject/",
+
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^41.1.0",
     "@ckeditor/ckeditor5-react": "^6.2.0",
@@ -21,6 +23,7 @@
     "axios": "^1.6.7",
     "draft-js": "^0.11.7",
     "draftjs-to-html": "^0.9.1",
+    "gh-pages": "^6.1.1",
     "html-react-parser": "^5.1.8",
     "lucide-react": "^0.344.0",
     "quill-image-resize-module-react": "^3.0.0",
@@ -44,7 +47,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [

@@ -506,7 +506,7 @@ const Postpage = () => {
             <div className="flex items-center  w-full h-full px-4">
               <img
                 className="rounded-full h-14 w-14"
-                src={post.user.avatar}
+                src={user1.avatar}
                 alt=""
               />
               <input

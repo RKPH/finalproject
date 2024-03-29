@@ -14,7 +14,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 //Mui Components
 import Tippy from "@tippyjs/react/headless";
 import "tippy.js/themes/light.css";
-import { Dialog, Transition } from "@headlessui/react";
+
 
 // Custom Components
 import PostTransition from "./PostTransittion";
@@ -211,8 +211,8 @@ const Index = () => {
           </div>
           {/* Menu */}
           {/* row of posts */}
-          <div className=" w-full h-fit flex items-center justify-center px-10 mt-2 border-b border-gray-200">
-            <div className="w-full h-full flex justify-center items-center cursor-pointer py-2 px-4">
+          <div className=" w-full h-fit flex items-center justify-between px-10 mt-2 border-b bg-red-200 border-gray-200">
+            <div className="w-full h-full flex flex-row  justify-evenly bg-blue-100 items-center cursor-pointer py-2 px-4">
               <div className="grid grid-cols-3 gap-4">
                 {userPosts.map((post) => {
                   // Convert post.time_created to a Date object

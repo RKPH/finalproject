@@ -4,9 +4,9 @@ import { useSelector } from "react-redux";
 const UserTransition = ({ isOpen, closeUserModal, user, updateUser }) => {
   const [editedTitle, setEditedTitle] = useState(user.username);
   const ava = user.avatar;
-  const [avatar, setAvatar] = useState(ava);
+  const [avatar, setAvatar] = useState(user.avatar);
 
-  const [selectedFile, setSelectedFile] = useState(null);
+
   const token = useSelector((state) => state.user.token);
   // Function to handle file selection
 
@@ -72,10 +72,7 @@ const UserTransition = ({ isOpen, closeUserModal, user, updateUser }) => {
             >
               <Dialog.Panel className="w-full max-w-xl transform overflow-y-auto rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                 {/* Dialog Title */}
-                <Dialog.Title
-                  as="h2"
-                  className="font-bold text-[20px] font-[monsterat] text-center leading-6 text-gray-900"
-                >
+                
                   <div className="mt-2 flex justify-center  ">
                     <img
                       src={avatar}
@@ -95,7 +92,7 @@ const UserTransition = ({ isOpen, closeUserModal, user, updateUser }) => {
 
                     {/* Button */}
                   </div>
-                </Dialog.Title>
+              
 
                 {/* Post Content */}
                 <div className="mt-2 flex justify-center  ">

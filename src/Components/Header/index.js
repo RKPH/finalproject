@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import Loginpage from "../Login/Loginpage";
 import Registerpage from "../Login/Registerpage";
 import User from "../API/User";
+import { useNavigate } from "react-router-dom";
 //icon
 import SearchIcon from "@mui/icons-material/Search";
-import LogoIcon from "../../assests/Image 109.png";
+
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import LogoutIcon from "@mui/icons-material/Logout";
 import '@fontsource/raleway';
@@ -14,7 +15,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 
 import Tippy from "@tippyjs/react/headless";
 import "tippy.js/themes/light.css";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutSuccess } from "../../Hooks/UserSlice"; // Import the logoutSuccess action
 
@@ -26,6 +27,7 @@ const Header = () => {
   const user = User(); // Fetching user data
 
   const dispatch = useDispatch();
+  const navigate =useNavigate();
   const openLoginPopup = () => {
     setLoginPopup(true);
     setRegisterPopup(false); // Close register popup if open
@@ -38,6 +40,7 @@ const Header = () => {
 
   const handleLogout = () => {
     dispatch(logoutSuccess()); // Dispatch the logoutSuccess action when the Logout button is clicked
+    navigate("/")
   };
   return (
     <header

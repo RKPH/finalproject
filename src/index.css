@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100..900&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-family: sans-serif;
+}
+
+.public-DraftEditor-content .rdw-option-wrapper {
+  color: black; /* Change text color to black */
+}
+
+/* Customize toolbar dropdown icon color */
+.public-DraftEditor-content .rdw-option-wrapper .rdw-dropdown-selectedtext {
+  color: black; /* Change dropdown icon color to black */
+}

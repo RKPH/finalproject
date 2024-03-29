@@ -1,0 +1,414 @@
+.logo{
+    color: #FFF;
+    font-family: Bitter;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 48px; /* 150% */
+}
+a{
+    color: #FFF;
+    font-family: Raleway;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px; /* 157.143% */
+}
+h3{
+    color: #FFF;
+    font-family: Raleway;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px; /* 157.143% */
+}
+.lower h3{
+    color: yellow;
+}
+
+
+@media only screen and (max-width: 650px) {
+    /* Overall footer styles */
+    
+    
+    /* Logo */
+    [name="logo"] {
+      width: 100%; /* Occupy full width */
+      justify-content: center; /* Center align */
+      margin-bottom: 20px; /* Add margin for better spacing */
+      margin-right: 5%;
+    }
+    [name="logo"] img{
+        width: 30px;
+        height: 30px;
+    }
+    [name="logo"] h3{
+      font-size: 75%;
+      line-height: 1.75rem; /* 150% */
+    }
+    
+    /* Content */
+    [name="upper-content"] {
+      flex-direction: column; /* Stack content vertically */
+      text-align: center; /* Center align text */
+      margin-left: auto;
+      font-size: 75%;
+      gap: 1rem;
+      width: 800px;
+      display: flex;
+      flex-direction: row;
+    }
+    [name="upper-content"] a{
+        font-size: 10px;
+      }
+    
+    /* Subscription */
+    [name="subscription"] {
+        width: 200px; /* Adjust width as needed */
+        max-width: 400px; /* Set a maximum width if necessary */
+        margin-left: auto; /* Center align horizontally */
+        margin-right: auto; /* Center align horizontally */
+      }
+      
+      /* Subscription text */
+      [name="subscription-text"] {
+        margin-bottom: 10px; /* Add margin for better spacing */
+        width: 100%;
+      }
+      [name="subscription-text"] h1{
+        font-size: 75%;
+        font-weight: bold;
+        height: 20px;
+        width: 100%;
+      }
+      [name="subscription-text"] h3{
+        font-size: 55%;
+        height: 10px;
+        width: 200px;
+      }
+      
+      /* Email input */
+      [name="email"] {
+        width: 100%;
+        height: 40%;
+        display: flex;
+        flex-direction: column;
+      }
+      [name="email"] input{
+        width: 50% !important;
+        height: 80%;
+        font-size: xx-small;
+        text-align: center;
+      }
+      [name="email"] button{
+        font-size: 10px;
+        height: 20%;
+        width: 50%;
+        border-radius: 0%;
+      }
+      
+      /* Email input field */
+      input[type="email"] {
+        width: calc(100% - 140px); /* Adjust width for the input field */
+      }
+      
+      /* Subscribe button */
+      [name="subcrible"] {
+        width: 114px; /* Adjust width for the subscribe button */
+      }
+    
+    
+    /* Language selection */
+    
+    /* Social media icons */
+    [name="social-icons"] {
+      justify-content: center; /* Center align */
+    }
+
+    /*Lower*/
+    [name="Lower"] select{
+        width: 20%;
+        height: 100%;
+        font-size: xx-small;
+    }
+    [name="lower-content"]{
+        gap:10px;
+        align-items: center;
+    }
+    [name="lower-content"] h3{
+        font-size: 8px;
+    }
+    [name="lower-content"] ul{
+        gap: 5px;
+        display: flex;
+        flex-direction: row;
+        list-style-type: none;
+    }
+    [name="lower-content"] a{
+        font-size: 10px;
+    }
+    [name="social-icons"] img{
+        width: 20px;
+        height: 20px;
+    }
+  }
+
+
+  @media only screen and (min-width: 650px) {
+    /* Overall footer styles */
+    
+    
+    /* Logo */
+    [name="logo"] {
+      width: 25%; /* Occupy full width */
+      justify-content: center; /* Center align */
+      margin-bottom: 20px; /* Add margin for better spacing */
+      margin-right: 0%;
+    }
+    [name="logo"] img{
+        width: 45px;
+        height: 45px;
+    }
+    [name="logo"] h3{
+        font-size: 15px;
+        line-height: 22px; /* 157.143% */
+    }
+    
+    /* Content */
+    [name="upper-content"] {
+      flex-direction: column; /* Stack content vertically */
+      
+      margin-left: 3%;
+      font-size: 15px;
+      gap: 1rem;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+
+    }
+    [name="upper-content"] a{
+        font-size: 12px;
+      }
+    
+    /* Subscription */
+    [name="subscription"] {
+        width: 100%; /* Adjust width as needed */
+        max-width: 400px; /* Set a maximum width if necessary */
+        margin-left: auto; /* Center align horizontally */
+        margin-right: auto; /* Center align horizontally */
+      }
+      
+      /* Subscription text */
+      [name="subscription-text"] {
+        margin-bottom: 10px; /* Add margin for better spacing */
+        width: 100%;
+      }
+      [name="subscription-text"] h1{
+        font-size: 15.5px;
+        font-weight: bold;
+        height: 20px;
+        width: 200px;
+      }
+      [name="subscription-text"] h3{
+        font-size: 10px;
+        height: 10px;
+        width: 100%;
+      }
+      
+      /* Email input */
+      [name="email"] {
+        width: 100%;
+        height: 40%;
+        display: flex;
+        flex-direction: row;
+      }
+      [name="email"] input{
+        width: 100% !important;
+        height: 80%;
+        font-size: xx-small;
+        text-align: center;
+      }
+      [name="email"] button{
+        font-size: 10px;
+        height: 80%;
+        width: 40%;
+        
+      }
+      
+      /* Email input field */
+      input[type="email"] {
+        width: calc(100% - 140px); /* Adjust width for the input field */
+      }
+      
+      /* Subscribe button */
+      [name="subcrible"] {
+        width: 114px; /* Adjust width for the subscribe button */
+      }
+    
+    
+    /* Language selection */
+    
+    /* Social media icons */
+    [name="social-icons"] {
+      justify-content: center; /* Center align */
+    }
+
+    /*Lower*/
+    [name="Lower"] select{
+        width: 20%;
+        height: 100%;
+        font-size: xx-small;
+    }
+    [name="lower-content"]{
+        gap:10px;
+        align-items: center;
+    }
+    [name="lower-content"] h3{
+        font-size: 8px;
+    }
+    [name="lower-content"] ul{
+        gap: 5px;
+        display: flex;
+        flex-direction: row;
+        list-style-type: none;
+    }
+    [name="lower-content"] a{
+        font-size: 10px;
+    }
+    [name="social-icons"] img{
+        width: 20px;
+        height: 20px;
+    }
+  }
+
+
+
+  @media only screen and (min-width: 780px) {
+    /* Overall footer styles */
+    
+    
+    /* Logo */
+    [name="logo"] {
+      width: 25%; /* Occupy full width */
+      justify-content: center; /* Center align */
+      margin-bottom: 20px; /* Add margin for better spacing */
+      margin-right: 0%;
+    }
+    [name="logo"] img{
+        width: 60px;
+        height: 60px;
+    }
+    [name="logo"] h3{
+        font-size: 100%;
+        line-height: auto;
+    }
+    
+    /* Content */
+    [name="upper-content"] {
+      flex-direction: column; /* Stack content vertically */
+      
+      margin-left: 3%;
+      font-size: 18px;
+      gap: 1rem;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+    }
+    [name="upper-content"] a{
+        font-size: 15px;
+      }
+    
+    /* Subscription */
+    [name="subscription"] {
+        width: 100%; /* Adjust width as needed */
+        max-width: 400px; /* Set a maximum width if necessary */
+        margin-right: auto; /* Center align horizontally */
+      }
+      
+      /* Subscription text */
+      [name="subscription-text"] {
+        margin-bottom: 10px; /* Add margin for better spacing */
+        width: 100%;
+      }
+      [name="subscription-text"] h1{
+        font-size: 18px;
+        font-weight: bold;
+        height: 20px;
+        width: 100%;
+      }
+      [name="subscription-text"] h3{
+        font-size: 13px;
+        height: 10px;
+        width: 100%;
+        margin-bottom: 2px;
+      }
+      
+      /* Email input */
+      [name="email"] {
+        width: 100%;
+        height: 40%;
+        display: flex;
+        flex-direction: row;
+      }
+      [name="email"] input{
+        width: 100% !important;
+        height: 80%;
+        font-size: xx-small;
+        text-align: center;
+      }
+      [name="email"] button{
+        font-size: 15px;
+        height: 80%;
+        width: 40%;
+        
+      }
+      
+      /* Email input field */
+      input[type="email"] {
+        width: calc(100% - 140px); /* Adjust width for the input field */
+      }
+      
+      /* Subscribe button */
+      [name="subcrible"] {
+        width: 114px; /* Adjust width for the subscribe button */
+      }
+    
+    
+    /* Language selection */
+    
+    /* Social media icons */
+    [name="social-icons"] {
+      justify-content: center; /* Center align */
+    }
+
+    /*Lower*/
+    [name="Lower"] select{
+        width: 20%;
+        height: 100%;
+        font-size: xx-small;
+    }
+    [name="lower-content"]{
+        gap:10px;
+        align-items: center;
+    }
+    [name="lower-content"] h3{
+        font-size: 8px;
+    }
+    [name="lower-content"] ul{
+        gap: 5px;
+        display: flex;
+        flex-direction: row;
+        list-style-type: none;
+    }
+    [name="lower-content"] a{
+        font-size: 10px;
+    }
+    [name="social-icons"] img{
+        width: 20px;
+        height: 20px;
+    }
+  }
+
+

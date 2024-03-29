@@ -2,7 +2,7 @@
   "name": "finalproject",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://rkph.github.io/finalproject/",
+
 
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^41.1.0",

@@ -107,7 +107,7 @@ const Index = () => {
           body: JSON.stringify({
             ...selectedPost,
             title: editedTitle,
-            text: editedContent,
+            text: editedContent ? editedContent : selectedPost.text,
           }),
         }
       );

@@ -391,12 +391,12 @@ const Homepage = () => {
                         </div>
                       </div>
                     </section>
-                    <section className="w-[45%] h-full  flex  justify-center">
+                    <section className="w-[45%] h-full  flex bg-blue-50  justify-center">
                       <img
                         src={item.post_background_img}
                         alt=""
-                        style={{ height: "80%", width: "70%" }}
-                        className="rounded-tl-[18px] rounded-tr-[18px]"
+                        // style={{ height: "80%", width: "70%" }}
+                        className="rounded-tl-[18px] w-full h-full rounded-[18px]"
                       />
                     </section>
                   </div>

@@ -212,7 +212,7 @@ const Index = () => {
           </div>
           {/* Menu */}
           {/* row of posts */}
-          <div className=" w-full h-fit flex items-center justify-between px-10 mt-2 border-b bg-red-200 border-gray-200">
+          <div className=" w-full h-fit flex items-center justify-between px-10 mt-2 border-b  border-gray-200">
             <div className="w-full h-full flex flex-row  justify-evenly bg-blue-100 items-center cursor-pointer py-2 px-4">
               <div className="grid grid-cols-3 gap-4">
                 {userPosts.map((post) => {

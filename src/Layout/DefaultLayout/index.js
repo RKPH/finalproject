@@ -8,7 +8,7 @@ const DefaultLayout = ({children}) => {
 
          <Header className="w-full fixed top-0 left-0 right-0 z-[9999px] bg-white"/>
          <ToastContainer autoClose={400} pauseOnHover={false} className="toast-position mt-20" />
-          <div className='mt-20'>
+          <div className='mt-20 min-h-svh'>
                {children}
           </div>
           <Footer className="w-full"/>

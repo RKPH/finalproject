@@ -8,8 +8,8 @@ import SearchIcon from "@mui/icons-material/Search";
 
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import LogoutIcon from "@mui/icons-material/Logout";
-import '@fontsource/raleway';
- 
+import "@fontsource/raleway";
+
 import SettingsIcon from "@mui/icons-material/Settings";
 //libray
 
@@ -23,11 +23,50 @@ const Header = () => {
   const [loginPopup, setLoginPopup] = useState(false);
   const [registerPopup, setRegisterPopup] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [typingTimeout, setTypingTimeout] = useState(0);
+  const [isOpenSearch, setIsOpenSearch] = useState(false);
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+  const [inputValue, setInputValue] = useState("");
+  const [results, setResult] = useState([]);
   const user = User(); // Fetching user data
-
+  const fetchResult = async (value) => {
+    try {
+      const response = await fetch(
+        `https://englishforum.zeabur.app/api/v1/posts/search?keyword=${value}`
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch comments");
+      }
+      const data = await response.json();
+      // Handle the data, e.g., set it to state or process it further
+      setResult(data);
+      console.log("result", data);
+    } catch (error) {
+      console.error("Error fetching result:", error);
+      // Handle the error appropriately, e.g., show an error message
+    }
+  };
   const dispatch = useDispatch();
-  const navigate =useNavigate();
+  const navigate = useNavigate();
+
+  const handleInputChange = (event) => {
+    const newValue = event.target.value;
+    setInputValue(newValue);
+
+    if (typingTimeout) {
+      clearTimeout(typingTimeout);
+    }
+
+    setTypingTimeout(
+      setTimeout(() => {
+        fetchResult(inputValue);
+      }, 800)
+    ); // Ghi log sau khi người dùng dừng gõ trong 1 giây
+  };
+
+  const handleInputBlur = () => {
+    console.log(inputValue);
+  };
   const openLoginPopup = () => {
     setLoginPopup(true);
     setRegisterPopup(false); // Close register popup if open
@@ -40,7 +79,7 @@ const Header = () => {
 
   const handleLogout = () => {
     dispatch(logoutSuccess()); // Dispatch the logoutSuccess action when the Logout button is clicked
-    navigate("/")
+    navigate("/");
   };
   return (
     <header
@@ -53,26 +92,84 @@ const Header = () => {
         to="/"
       >
         <div className="flex flex-row justify-center items-center w-full h-full">
-          
-          <div className="font-bold text-3xl text-blue-950 font-[Raleway]" style={{ fontFamily: 'Raleway' }}>ITEC</div>
+          <div
+            className="font-bold text-3xl text-blue-950 font-[Raleway]"
+            style={{ fontFamily: "Raleway" }}
+          >
+            ITEC
+          </div>
         </div>
       </Link>
 
       {/* Navbar */}
+
       <nav className="w-[40%] h-full flex bg-[F3F4F6] items-center ">
-        <form className="relative">
-          <input
-            type="text"
-            className="w-[399px] h-[50px] pl-12 pr-14 py-3 ml-[2%] rounded-3xl bg-gray-100 border border-transparent focus:outline-none focus:border-black"
-            placeholder="Search..."
-          />
-          <button
-            type="submit"
-            className="absolute right-0 top-0 h-full px-3 py-3"
-          >
-            <SearchIcon className="h-6 w-6 text-gray-400 hover:text-gray-700 cursor-pointer" />
-          </button>
-        </form>
+        <Tippy
+          interactive
+          arrow={true}
+          placement="bottom-end"
+          visible={isOpenSearch}
+          onClickOutside={() => setIsOpenSearch(false)}
+          render={(attrs) => (
+            <div
+              className="box min-h-[300px] w-[399px] overflow-y-auto justify-center flex px-2 py-2 bg-[whitesmoke] rounded-lg shadow-lg border border-gray-300 z-10"
+              tabIndex="-1"
+              {...attrs}
+            >
+              <div
+                className="py-1 w-full h-full "
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="options-menu"
+              >
+                {results.length === 0 ? (
+                  <div className="flex items-center justify-center h-fit">
+                    <p className="text-gray-500">No results found.</p>
+                  </div>
+                ) : (
+                  <div className="flex flex-col justify-between m-1 cursor-pointer">
+                    {results.map((result, index) => (
+                      <div
+                        className="flex w-full hover:bg-white items-center py-1 px-2 mb-2 h-fit"
+                        key={index}
+                      >
+                        <h1 className="font-semibold text-[18px] font-[monsterat] break-words whitespace-normal">
+                          <Link to={`/post/${result.id}`}>
+                            {" "}
+                            <h1 className="text-black">{result.title}</h1>{" "}
+                          </Link>
+                        </h1>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+        >
+          <form className="relative">
+            <input
+              on
+              onClickOutside={() => setIsOpenSearch(false)}
+              onFocus={() => setIsOpenSearch(true)} // Hiển thị Tippy khi con trỏ chuột vào
+              onChange={handleInputChange}
+              value={inputValue}
+              onBlur={handleInputBlur}
+              type="text"
+              className="w-[399px]  h-[50px] pl-12 pr-14 py-3 ml-[2%] rounded-3xl bg-gray-100 border border-transparent focus:outline-none focus:border-black"
+              placeholder="Search..."
+            />
+            <button
+              type="submit"
+              onClick={()=>{ setIsOpenSearch(false)}}
+              className="absolute right-0 top-0 h-full px-3 py-3"
+            >
+              <Link to={`/search?q=${inputValue}`}>
+                <SearchIcon  className="h-6 w-6 text-gray-400 hover:text-gray-700 cursor-pointer" />
+              </Link>
+            </button>
+          </form>
+        </Tippy>
       </nav>
 
       <div className="flex items-center justify-end w-[25%] h-full px-3 ">

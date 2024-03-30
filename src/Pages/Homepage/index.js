@@ -2,9 +2,10 @@ import BookmarkBorderRoundedIcon from "@mui/icons-material/BookmarkBorderRounded
 import Loading from "../../assests/Loading_icon.gif";
 import TuneRoundedIcon from "@mui/icons-material/TuneRounded";
 import React, { useEffect, useState } from "react";
-
+import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 import { v4 as uuidv4 } from "uuid";
-
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { fetchAPI } from "../../Components/API/fetchAPI";
 import Cateogry from "../../Components/API/Cateogry";
@@ -12,9 +13,11 @@ const Homepage = () => {
   // const Category = Cateogry();
   // Assume Cateogry is a custom hook that fetches data and uses hooks
   const Category = Cateogry(); // Call it at the top level of your component
-
+  const user = JSON.parse(localStorage.getItem("auth")) || {};
+  const token = user.token
   const [selectedItem, setSelectedItem] = useState(null);
   const [index, setIndex] = useState(0);
+  const navigate = useNavigate();
   useEffect(() => {
     if (Category.length > 0) {
       setSelectedItem(Category[0].name);
@@ -26,7 +29,15 @@ const Homepage = () => {
     const randomIndex = Math.floor(Math.random() * data.content.length);
     setIndex(randomIndex);
   };
-
+  
+  const handleUpload = () =>{
+      if (!token) {
+          toast.error("please login")
+      }
+      else {
+        navigate("/upload")
+      }
+  }
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [data, setData] = useState([]);

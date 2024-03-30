@@ -6,14 +6,14 @@ import "./Postpage.css";
 import CloseIcon from "@mui/icons-material/Close";
 import CommentDrawer from "./Drawer";
 import Loading from "../../assests/Loading_icon.gif";
-
+import { Link } from "react-router-dom";
 const Postpage = () => {
   const user = JSON.parse(localStorage.getItem("auth")) || {};
   const [replies, setReplies] = useState(0);
   const user1 = User();
   const postID = useParams();
   // commment
-   
+
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [commentId, setCommentId] = useState(null);
   // State to store the comment ID to which the user is replying
@@ -108,7 +108,7 @@ const Postpage = () => {
       setReplyIndex(null);
     }
   };
-  
+
   const fetchComments = async () => {
     try {
       const response = await fetch(
@@ -129,10 +129,8 @@ const Postpage = () => {
     if (replyComment !== null) {
       // Gọi hàm fetchComments để cập nhật lại số lượng reply
       fetchComments();
-      
     }
   }, [replyComment]);
-  
 
   // Function to submit a reply
   const submitReply = async (replyInput, userID, commentID) => {
@@ -218,8 +216,6 @@ const Postpage = () => {
     fetchPost();
   }, []);
 
-  
-
   //  get replyComment
   const fetchReplyComment = async (id) => {
     setLoading1(true);
@@ -243,7 +239,6 @@ const Postpage = () => {
 
   useEffect(() => {
     fetchReplyComment(commentId);
-   
   }, [commentId]);
 
   //  Define a variable to store the total count of comments and their replies
@@ -260,7 +255,7 @@ const Postpage = () => {
       totalCommentsAndReplies += comment.replyComments.length;
     }
   });
-  
+
   // Now, totalCommentsAndReplies contains the total count of comments and their replies
 
   let date;
@@ -483,6 +478,13 @@ const Postpage = () => {
         >
           {renderParagraphs()}
         </div>
+        <Link to="/">
+        <div className="mt-6 text-center w-full items-center justify-center flex h-[100px]  bg-white shadow-lg">
+          <p className="text-zinc-700 text-xl font-medium font-['Raleway'] leading-relaxed">
+            You have finished reading (back to home page)
+          </p>
+        </div>
+        </Link>
       </div>
 
       {/* Drawer Component */}
@@ -503,7 +505,7 @@ const Postpage = () => {
         commentId={commentId}
         setAllComments={setAllComments}
         setCommentInput={setCommentInput}
-       commentInputRef={commentInputRef}
+        commentInputRef={commentInputRef}
         submitComment={submitComment}
         handleonpenReplyField={handleonpenReplyField}
         replyIndex={replyIndex}

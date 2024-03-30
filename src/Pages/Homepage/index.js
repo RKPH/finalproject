@@ -87,7 +87,7 @@ const Homepage = () => {
     <main className="min-h-[1000px] bg-white flex items-center justify-center">
       <div className="w-[95%] h-full  flex flex-row">
         <section
-          className="w-[70%]   overflow-auto flex  flex-col  text-white border-r py-5 bg-white"
+          className="w-[70%]   overflow-auto  flex  flex-col  text-white border-r py-10 bg-white"
           style={{ zIndex: "0" }}
         >
           {/* menu */}
@@ -97,13 +97,13 @@ const Homepage = () => {
               {Category.map((item) => (
                 <div
                   key={item.id}
-                  className={`h-16 uppercase cursor-pointer ${
+                  className={`h-8 uppercase cursor-pointer ${
                     selectedItem === item.name ? "selected font-bold" : ""
                   }`}
                   onClick={() => handleItemClick(item.name)}
                 >
                   <div
-                    className={`text-gray-500 text-lg leading-7 hover:text-black ${
+                    className={`text-gray-500 text-base leading-5 hover:text-black ${
                       selectedItem === item.name ? "selected font-bold" : ""
                     }`}
                   >
@@ -129,33 +129,33 @@ const Homepage = () => {
           {/* Menu */}
 
           {/* MAIN POSTS      */}
-          <div className="w-full h-[642px] bg-white flex justify-center mb-8">
-            <div className="w-[800px] h-full  flex-col justify-evenly border  px-[12px] py-[12px] shadow-lg  border-[lightGray] rounded-[18px] flex items-start">
-              <img
-                src={data.content[index].post_background_img}
-                alt=""
-                style={{ height: "380px", width: "100%" }}
-                className="rounded-tl-[18px] rounded-tr-[18px]"
-              />
+          <div className="w-full h-fit bg-white flex justify-center mb-8">
+            <div className="w-[800px] h-full flex-col justify-evenly border px-3 py-3 shadow-lg border-[lightGray] rounded-[18px] flex items-start">
+              <div
+                className="w-full h-[300px] rounded-tl-[18px] rounded-tr-[18px] mb-4"
+                style={{
+                  backgroundImage: `url(${data.content[index].post_background_img})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              ></div>
               <div>
                 <Link
-                  to="posts?id=1"
-                  className="font-bold text-[32px]  font-['Bitter'] leading-[48px] text-black cur text-left hover:underline"
+                  to="i"
+                  className="font-bold text-xl font-['Bitter'] leading-[18px] text-black cursor-pointer text-left hover:underline"
                 >
-                  {" "}
                   {data.content[index].title}
                 </Link>
               </div>
-              <div>
+              <div className="py-4">
                 {/* Display only the first 100-150 characters of the text */}
                 <p
-                  className="text-zinc-900 w-[700px] text-base font-normal font-['Raleway'] leading-snug text-justify h-[86px] text-wrap"
+                  className="text-zinc-900 w-[700px] text-base font-normal font-['Raleway'] leading-snug text-justify h-fit text-wrap"
                   dangerouslySetInnerHTML={{
                     __html: truncatedFirstParagraph,
                   }}
                 />
               </div>
-
               <div className="w-full h-7 flex flex-row">
                 <section className="w-[50%] h-full flex flex-row items-center ">
                   <button className="text-gray-600 w-[44px] h-full text-xs font-normal font-['Raleway'] leading-tight rounded-xl border border-black mr-[12px]">
@@ -173,31 +173,7 @@ const Homepage = () => {
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
                       >
-                        <path
-                          d="M5.99998 6.3C6.49703 6.3 6.89998 5.89706 6.89998 5.4C6.89998 4.90294 6.49703 4.5 5.99998 4.5C5.50292 4.5 5.09998 4.90294 5.09998 5.4C5.09998 5.89706 5.50292 6.3 5.99998 6.3Z"
-                          fill="#323842"
-                        />
-                        <path
-                          d="M1.62271 6.3546C1.5436 6.2531 1.50044 6.1282 1.5 5.99951C1.49957 5.87082 1.54189 5.74563 1.62031 5.6436C2.22661 4.8486 3.86581 3 6.00001 3C8.10601 3 9.76081 4.8474 10.3755 5.643C10.455 5.74504 10.4981 5.87067 10.4981 6C10.4981 6.12933 10.455 6.25496 10.3755 6.357C9.76081 7.1526 8.10601 9 6.00001 9C3.89401 9 2.23591 7.1484 1.62271 6.3546Z"
-                          stroke="#323842"
-                          strokeWidth="0.72"
-                          strokeMiterlimit="10"
-                          strokeLinecap="square"
-                        />
-                        <path
-                          d="M5.99998 7.8C7.32546 7.8 8.39998 6.72548 8.39998 5.4C8.39998 4.07452 7.32546 3 5.99998 3C4.67449 3 3.59998 4.07452 3.59998 5.4C3.59998 6.72548 4.67449 7.8 5.99998 7.8Z"
-                          stroke="#323842"
-                          strokeWidth="0.72"
-                          strokeMiterlimit="10"
-                          strokeLinecap="square"
-                        />
-                        <path
-                          d="M5.99998 6.3C6.49703 6.3 6.89998 5.89706 6.89998 5.4C6.89998 4.90294 6.49703 4.5 5.99998 4.5C5.50292 4.5 5.09998 4.90294 5.09998 5.4C5.09998 5.89706 5.50292 6.3 5.99998 6.3Z"
-                          stroke="#323842"
-                          strokeWidth="0.72"
-                          strokeMiterlimit="10"
-                          strokeLinecap="square"
-                        />
+                        {/* SVG Path */}
                       </svg>
                     </i>{" "}
                     1.8M
@@ -211,20 +187,7 @@ const Homepage = () => {
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
                       >
-                        <path
-                          d="M9.90002 3.90002C10.0592 3.90002 10.2118 3.96324 10.3243 4.07576C10.4368 4.18828 10.5 4.34089 10.5 4.50002V7.80002C10.5 7.95915 10.4368 8.11177 10.3243 8.22429C10.2118 8.33681 10.0592 8.40002 9.90002 8.40002H9.30002L9.30002 9.90002L7.20002 8.40002H5.40002"
-                          stroke="#323842"
-                          strokeWidth="0.72"
-                          strokeMiterlimit="10"
-                          strokeLinecap="square"
-                        />
-                        <path
-                          d="M8.1 1.80005L2.1 1.80005C1.94087 1.80005 1.78826 1.86326 1.67574 1.97578C1.56321 2.08831 1.5 2.24092 1.5 2.40005L1.5 6.30005C1.5 6.45918 1.56321 6.61179 1.67574 6.72431C1.78826 6.83683 1.94087 6.90005 2.1 6.90005H3L3 9.00005L5.4 6.90005L8.1 6.90005C8.25913 6.90005 8.41174 6.83683 8.52426 6.72431C8.63679 6.61179 8.7 6.45918 8.7 6.30005V2.40005C8.7 2.24092 8.63679 2.08831 8.52426 1.97578C8.41174 1.86326 8.25913 1.80005 8.1 1.80005Z"
-                          stroke="#323842"
-                          strokeWidth="0.72"
-                          strokeMiterlimit="10"
-                          strokeLinecap="square"
-                        />
+                        {/* SVG Path */}
                       </svg>
                     </i>{" "}
                     4k
@@ -235,7 +198,11 @@ const Homepage = () => {
                     style={{ color: "black" }}
                     className="mr-1 hover:scale-110"
                   />
-                  <img src={data.content[index].user.avatar} alt="user" className="w-6 h-6  rounded-xl mr-2" />
+                  <img
+                    src={data.content[index].user.avatar}
+                    alt="user"
+                    className="w-6 h-6 rounded-xl mr-2"
+                  />
                   <div className="text-gray-700 text-sm font-semibold font-['Raleway'] leading-snug">
                     {data.content[index].user.username}
                   </div>
@@ -243,6 +210,7 @@ const Homepage = () => {
               </div>
             </div>
           </div>
+
           {/* MAIN POSTS      */}
           {data.content
             .filter((item) => item.category.name === selectedItem)
@@ -269,13 +237,13 @@ const Homepage = () => {
               return (
                 <div
                   key={item.id}
-                  className="w-full h-[312px]  flex justify-center mb-8"
+                  className="w-full h-[290px]  flex justify-center mb-8"
                 >
-                  <div className="w-[800px] h-full  flex flex-row px-[12px] py-[12px]  shadow-lg rounded-3xl border border-[lightGray]">
-                    <section className="w-[65%] h-full  flex  flex-col justify-between">
+                  <div className="w-[800px] h-full  flex flex-row px-[11px] py-[12px]  shadow-lg rounded-3xl border border-[lightGray]">
+                    <section className="w-[65%] h-full  flex  flex-col justify-between px-1">
                       <Link
                         to={`/post/${item.id}`}
-                        className="w-[324px] text-zinc-900 text-2xl font-semibold font-['Bitter'] leading-9 text-wrap text-start hover:underline"
+                        className="w-full text-zinc-900 text-xl font-semibold font-['Bitter'] leading-9 text-wrap text-start hover:underline"
                       >
                         {item.title}
                       </Link>
@@ -283,7 +251,7 @@ const Homepage = () => {
                         dangerouslySetInnerHTML={{
                           __html: truncatedFirstParagraph,
                         }}
-                        className="post-text w-[396px] text-zinc-900 text-base font-normal font-['Raleway'] leading-tight text-justify whitespace-normal break-words "
+                        className="bg-red-50 w-[396px] text-zinc-900 text-sm font-normal font-['Raleway'] leading-tight text-justify whitespace-normal break-words "
                       />
                       <div className="w-full h-7 flex flex-row items-center">
                         <button className="text-gray-600 py-1 px-2 h-full text-xs font-normal font-['Raleway'] leading-tight rounded-xl border border-black mr-[12px] hover:bg-gray-100 inline-block">

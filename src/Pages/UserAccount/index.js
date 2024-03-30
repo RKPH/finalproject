@@ -60,6 +60,7 @@ const Index = () => {
       );
       console.log("Filtered posts:", filteredPosts);
       setUserPosts(filteredPosts);
+      setIsLoading(false)
     }
   }, [data, user]);
   const toggleTippy = (postId) => {

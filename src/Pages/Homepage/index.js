@@ -14,7 +14,7 @@ const Homepage = () => {
   const Category = Cateogry(); // Call it at the top level of your component
 
   const [selectedItem, setSelectedItem] = useState(null);
-
+  const [index, setIndex] = useState(0);
   useEffect(() => {
     if (Category.length > 0) {
       setSelectedItem(Category[0].name);
@@ -23,6 +23,8 @@ const Homepage = () => {
 
   const handleItemClick = (item) => {
     setSelectedItem(item);
+    const randomIndex = Math.floor(Math.random() * data.content.length);
+    setIndex(randomIndex);
   };
 
   const [isLoading, setIsLoading] = useState(true);
@@ -36,6 +38,10 @@ const Homepage = () => {
         setData(result);
 
         console.log("Data fetched at home:", data);
+        if (result.content) {
+          const randomIndex = Math.floor(Math.random() * result.content.length);
+          setIndex(randomIndex);
+        }
       } catch (error) {
         setError(error);
       } finally {
@@ -44,6 +50,8 @@ const Homepage = () => {
     };
 
     fetchData();
+    // const randomIndex = Math.floor(Math.random() * data.content.length);
+    // setIndex(randomIndex)
   }, []);
 
   if (isLoading) {
@@ -57,7 +65,24 @@ const Homepage = () => {
   if (error) {
     return <div>Error: {error.message}</div>;
   }
+  const extractFirstParagraph = (htmlString) => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(htmlString, "text/html");
+    const firstParagraph = doc.querySelector("p");
+    return firstParagraph ? firstParagraph.outerHTML : "";
+  };
 
+  // Extracting the first paragraph
+  const firstParagraph = extractFirstParagraph(data.content[index].text);
+
+  // Function to truncate the text
+  const truncateText = (text, maxLength) => {
+    if (text.length <= maxLength) return text;
+    return text.substring(0, maxLength) + "...";
+  };
+
+  // Truncate the first paragraph
+  const truncatedFirstParagraph = truncateText(firstParagraph, 190);
   return (
     <main className="min-h-[1000px] bg-white flex items-center justify-center">
       <div className="w-[95%] h-full  flex flex-row">
@@ -107,7 +132,7 @@ const Homepage = () => {
           <div className="w-full h-[642px] bg-white flex justify-center mb-8">
             <div className="w-[800px] h-full  flex-col justify-evenly border  px-[12px] py-[12px] shadow-lg  border-[lightGray] rounded-[18px] flex items-start">
               <img
-                src="https://media.istockphoto.com/id/499808819/vi/anh/nh%C3%ACn-t%E1%BB%AB-tr%C3%AAn-kh%C3%B4ng-khi-%E1%BB%9F-tr%C3%AAn-m%C3%A1y-bay.jpg?s=2048x2048&w=is&k=20&c=e46VwISQwxho9bvK_2-IMng0u9kdRYJWLA3by5sjLKk="
+                src={data.content[index].post_background_img}
                 alt=""
                 style={{ height: "380px", width: "100%" }}
                 className="rounded-tl-[18px] rounded-tr-[18px]"
@@ -118,18 +143,19 @@ const Homepage = () => {
                   className="font-bold text-[32px]  font-['Bitter'] leading-[48px] text-black cur text-left hover:underline"
                 >
                   {" "}
-                hung
+                  {data.content[index].title}
                 </Link>
               </div>
               <div>
-                <p className="text-zinc-900 w-[700px] text-base font-normal font-['Raleway'] leading-snug text-justify h-[86px] text-wrap ">
-                  For many, the concept of blockchain can seem perplexing and
-                  shrouded in mystery. Its intricate technical aspects, complex
-                  terminologies, and abstract explanations have left even the
-                  most seasoned individuals scratching their heads. It's as if
-                  the creators of blockchain...
-                </p>
+                {/* Display only the first 100-150 characters of the text */}
+                <p
+                  className="text-zinc-900 w-[700px] text-base font-normal font-['Raleway'] leading-snug text-justify h-[86px] text-wrap"
+                  dangerouslySetInnerHTML={{
+                    __html: truncatedFirstParagraph,
+                  }}
+                />
               </div>
+
               <div className="w-full h-7 flex flex-row">
                 <section className="w-[50%] h-full flex flex-row items-center ">
                   <button className="text-gray-600 w-[44px] h-full text-xs font-normal font-['Raleway'] leading-tight rounded-xl border border-black mr-[12px]">
@@ -209,9 +235,9 @@ const Homepage = () => {
                     style={{ color: "black" }}
                     className="mr-1 hover:scale-110"
                   />
-                  <div className="w-6 h-6 bg-zinc-300 rounded-xl mr-1" />
+                  <img src={data.content[index].user.avatar} alt="user" className="w-6 h-6  rounded-xl mr-2" />
                   <div className="text-gray-700 text-sm font-semibold font-['Raleway'] leading-snug">
-                    Benjamin Foster
+                    {data.content[index].user.username}
                   </div>
                 </section>
               </div>
@@ -330,7 +356,12 @@ const Homepage = () => {
                               />
                             </svg>
                           </i>{" "}
-                          4k
+                          {item.comments.length +
+                            item.comments.reduce(
+                              (totalReplies, comment) =>
+                                totalReplies + comment.replyComments.length,
+                              0
+                            )}{" "}
                         </div>
                         <i className="mr-1 cursor-pointer hover:scale-110">
                           <svg
@@ -350,15 +381,19 @@ const Homepage = () => {
                           style={{ color: "black" }}
                           className="mr-1 hover:scale-110"
                         />
-                        <div className="w-6 h-6 bg-zinc-300 rounded-xl mr-1" />
+                        <img
+                          src={item.user.avatar}
+                          alt="user"
+                          className="w-6 h-6 bg-zinc-300 rounded-xl mr-1"
+                        />
                         <div className="text-gray-700 text-sm font-semibold font-['Raleway'] leading-snug cursor-pointer hover:underline">
-                        {item.user.username}
+                          {item.user.username}
                         </div>
                       </div>
                     </section>
                     <section className="w-[45%] h-full  flex  justify-center">
                       <img
-                        src= {item.post_background_img}
+                        src={item.post_background_img}
                         alt=""
                         style={{ height: "80%", width: "70%" }}
                         className="rounded-tl-[18px] rounded-tr-[18px]"

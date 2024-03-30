@@ -49,7 +49,7 @@ function Loginpage(props) {
 
             <div className='popup-inner'>
                 <button
-                    className='btn login-btn'
+                    className='btn login-btn hover:bg-blue-800'
                     onClick={handleSubmit}
                 >
                     Login

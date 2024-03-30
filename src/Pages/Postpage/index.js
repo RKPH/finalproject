@@ -426,7 +426,7 @@ const Postpage = () => {
                 onClick={toggleDrawer}
                 className="text-zinc-700 text-base font-light font-['Raleway'] leading-relaxed cursor-pointer hover:scale-110"
               >
-                {comments.length}
+                {totalCommentsAndReplies}
               </p>
             </div>
           </div>

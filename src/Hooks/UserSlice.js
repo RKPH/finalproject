@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-
+import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 const storedAuth = localStorage.getItem('auth');
 const initialState = storedAuth ? JSON.parse(storedAuth) : {
   isAuthenticated: false,
@@ -62,11 +63,13 @@ export const loginUser = (email, password) => async (dispatch) => {
         token: data.token,
         refreshToken: data.refreshToken
       }));
+      toast.success("login success");
     } else {
       throw new Error('Login failed');
     }
   } catch (error) {
     console.error("Login failed:", error);
+    toast.error("login failed");
   }
 };
 

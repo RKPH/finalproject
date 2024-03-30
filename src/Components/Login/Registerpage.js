@@ -36,7 +36,7 @@ function Registerpage(props){
             
             <div className='popup-inner'>
                 <button
-                    className='btn register-btn'
+                    className='btn register-btn hover:bg-blue-800'
                     onClick={handleSubmit}
                 >
                     Register

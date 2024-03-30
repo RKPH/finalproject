@@ -93,7 +93,7 @@ const Homepage = () => {
           {/* menu */}
 
           <div className="w-full h-16  flex items-center justify-center  bg-white">
-            <div className="w-[820px]  relative z-0  flex justify-evenly justify-items-center">
+            <div className="w-[820px]  relative z-0  flex justify-between justify-items-center">
               {Category.map((item) => (
                 <div
                   key={item.id}
@@ -237,7 +237,7 @@ const Homepage = () => {
               return (
                 <div
                   key={item.id}
-                  className="w-full h-[290px]  flex justify-center mb-8"
+                  className="w-full fit  flex justify-center mb-8"
                 >
                   <div className="w-[800px] h-full  flex flex-row px-[11px] py-[12px]  shadow-lg rounded-3xl border border-[lightGray]">
                     <section className="w-[65%] h-full  flex  flex-col justify-between px-1">
@@ -359,13 +359,14 @@ const Homepage = () => {
                         </div>
                       </div>
                     </section>
-                    <section className="w-[45%] h-full  flex bg-blue-50  justify-center">
-                      <img
-                        src={item.post_background_img}
-                        alt=""
-                        // style={{ height: "80%", width: "70%" }}
-                        className="rounded-tl-[18px] w-full h-full rounded-[18px]"
-                      />
+                    <section className="w-[45%] h-full flex bg-blue-50 justify-center">
+                      <div className="h-[200px] w-full">
+                        <img
+                          src={item.post_background_img}
+                          alt=""
+                          className=" w-full h-full rounded-tl-[18px] rounded-[18px]"
+                        />
+                      </div>
                     </section>
                   </div>
                 </div>

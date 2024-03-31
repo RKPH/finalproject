@@ -396,7 +396,7 @@ const Postpage = () => {
               </p>
             </div>
 
-            <div className="gap-[4px] flex flex-row">
+            <div  onClick={toggleDrawer} className="gap-[4px] flex flex-row">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -412,7 +412,7 @@ const Postpage = () => {
                 />
               </svg>
               <p
-                onClick={toggleDrawer}
+                 onClick={toggleDrawer}
                 className="text-zinc-700 text-base font-light font-['Raleway'] leading-relaxed cursor-pointer hover:scale-110"
               >
                 {totalCommentsAndReplies}

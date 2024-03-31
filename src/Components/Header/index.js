@@ -59,7 +59,7 @@ const Header = () => {
 
     setTypingTimeout(
       setTimeout(() => {
-        console.log(newValue)
+        console.log("sa:",newValue)
         fetchResult(newValue);
       }, 800)
     ); // Ghi log sau khi người dùng dừng gõ trong 1 giây
@@ -257,9 +257,10 @@ const Header = () => {
                           </span>
                         </div>
                       </div> */}
-                      <div
-                        className="w-full h-[40px]  px-4  rounded-lg   cursor-pointer  hover:bg-white"
-                        onClick={handleLogout}
+                      <Link
+                      to={`/user/${user.id}`}
+                        className="w-full h-[40px]  text-black px-4  rounded-lg   cursor-pointer  hover:bg-white"
+                      
                       >
                         <div className="flex h-full items-center">
                           <SettingsIcon className="h-4 w-4 mr-4" />
@@ -268,7 +269,7 @@ const Header = () => {
                             Manage your account
                           </span>
                         </div>
-                      </div>
+                      </Link>
                       <div
                         className="w-full h-[40px]  px-4  rounded-lg   cursor-pointer m-1 hover:bg-white"
                         onClick={handleLogout}
@@ -295,6 +296,7 @@ const Header = () => {
           </div>
         )}
       </div>
+
     </header>
   );
 };

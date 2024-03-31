@@ -15,6 +15,7 @@ const Homepage = () => {
   const Category = Cateogry(); // Call it at the top level of your component
   const user = JSON.parse(localStorage.getItem("auth")) || {};
   const token = user.token
+  console.log("token here:" ,token)
   const [selectedItem, setSelectedItem] = useState(null);
   const [index, setIndex] = useState(0);
   const navigate = useNavigate();
@@ -30,13 +31,11 @@ const Homepage = () => {
     setIndex(randomIndex);
   };
   
-  const handleUpload = () =>{
-      if (!token) {
-          toast.error("please login")
-      }
-      else {
-        navigate("/upload")
-      }
+  const handleUpload = (e) => {
+    if (!user) {
+      e.preventDefault(); // This will prevent the Link from navigating to the "/upload" page
+      toast.error("Please login");
+    }
   }
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -152,7 +151,7 @@ const Homepage = () => {
               ></div>
               <div>
                 <Link
-                  to="i"
+                  to={`/post/${data.content[index].id}`}
                   className="font-bold text-xl font-['Bitter'] leading-[18px] text-black cursor-pointer text-left hover:underline"
                 >
                   {data.content[index].title}
@@ -386,7 +385,7 @@ const Homepage = () => {
         </section>
 
         <section className="w-[30%] h-full  sticky top-0  py-5 px-5 flex justify-start flex-col">
-          <Link to="/upload">
+          <Link onClick={handleUpload} to="/upload">
             <button className="w-[166px] h-11 relative bg-indigo-500 rounded-[22px] flex justify-evenly mb-4 hover:bg-indigo-600 focus:outline-none">
               <div className="left-[16px] top-[9px] absolute text-white text-base font-normal font-['Raleway'] leading-relaxed flex flex-row items-center">
                 <p className="mr-2">Draft an article</p>

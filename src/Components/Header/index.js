@@ -112,7 +112,7 @@ const Header = () => {
           onClickOutside={() => setIsOpenSearch(false)}
           render={(attrs) => (
             <div
-              className="box min-h-[300px] w-[399px] overflow-y-auto justify-center flex px-2 py-2 bg-[whitesmoke] rounded-lg shadow-lg border border-gray-300 z-10"
+              className="box min-h-fit max-h-[300px] w-[399px] overflow-y-auto justify-center flex px-2 py-2 bg-[whitesmoke] rounded-lg shadow-lg border border-gray-300 z-10"
               tabIndex="-1"
               {...attrs}
             >

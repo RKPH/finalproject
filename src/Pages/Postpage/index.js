@@ -1,15 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useParams } from "react-router";
-import { Drawer } from "@mui/material";
+
 import User from "../../Components/API/User";
 import "./Postpage.css";
-import CloseIcon from "@mui/icons-material/Close";
+
 import CommentDrawer from "./Drawer";
 import Loading from "../../assests/Loading_icon.gif";
 import { Link } from "react-router-dom";
 const Postpage = () => {
   const user = JSON.parse(localStorage.getItem("auth")) || {};
-  const [replies, setReplies] = useState(0);
+
   const user1 = User();
   const postID = useParams();
   // commment
@@ -272,12 +272,6 @@ const Postpage = () => {
     formattedDate = "Date not available";
   }
 
-  const handleKeyPress = (event) => {
-    if (event.key === "Enter") {
-      const userId = user1.id; // Example userId
-      submitComment(userId, commentInput);
-    }
-  };
 
   if (loading) {
     return (

@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { v4 as uuidv4 } from "uuid";
-import { useNavigate } from "react-router-dom";
+
 import { Link } from "react-router-dom";
 import { fetchAPI } from "../../Components/API/fetchAPI";
 import Cateogry from "../../Components/API/Cateogry";
@@ -18,7 +18,6 @@ const Homepage = () => {
   console.log("token here:" ,token)
   const [selectedItem, setSelectedItem] = useState(null);
   const [index, setIndex] = useState(0);
-  const navigate = useNavigate();
   useEffect(() => {
     if (Category.length > 0) {
       setSelectedItem(Category[0].name);

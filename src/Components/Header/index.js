@@ -59,7 +59,8 @@ const Header = () => {
 
     setTypingTimeout(
       setTimeout(() => {
-        fetchResult(inputValue);
+        console.log(newValue)
+        fetchResult(newValue);
       }, 800)
     ); // Ghi log sau khi người dùng dừng gõ trong 1 giây
   };
